@@ -1,6 +1,10 @@
 # Article Listing Properties
 > coming soon
 
+## How to use:
+> Install through the Plugin Manager. The Plugin decorates the ListProductService and adds PropertySets (`Shopware\Bundle\StoreFrontBundle\Struct\Property\Set`) to the ListProduct-Structs. The properties can be accessed in Smarty and PHP via 
+m`$sArticle->getAttributes('netiPropertySets')->get('0')`
+
 ## VCS
 https://github.com/NetInventors/sw.ext.neti_article_listing_properties/
 
