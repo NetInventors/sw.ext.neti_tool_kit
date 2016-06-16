@@ -42,11 +42,15 @@ We highly appreciate if you want to add further functions and nifty helper tools
 
  - www.shopinventors.de
  - www.netinventors.de
+<<<<<<< HEAD
  - the issues "[issues](https://github.com/NetInventors/sw.ext.neti_tool_kit/issues)" section of this repo
 
 ## License
 
 The MIT License (MIT). Please see License File for more information.
+=======
+ - The [Issues](https://github.com/NetInventors/sw.ext.neti_tool_kit/issues) section of this Repo
+>>>>>>> e9df1516f25bdea70f3e9e8a115e4e8903d222c4
 
 ## Contact
 Net Inventors GmbH  
