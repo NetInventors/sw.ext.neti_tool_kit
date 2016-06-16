@@ -33,8 +33,8 @@ We highly appreciate if you want to add further functions and nifty helper tools
  - www.netinventors.de
 
 ## Contact
-Net Inventors GmbH
-Stahltwiete 23 // 22761 Hamburg
-T 040 42934714-0  // F 040 42934714-9
+Net Inventors GmbH  
+Stahltwiete 23 // 22761 Hamburg  
+T 040 42934714-0  // F 040 42934714-9  
 www.netinventors.de // info@netinventors.de
 
