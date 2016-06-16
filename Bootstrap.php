@@ -18,7 +18,7 @@ use Shopware\NetiToolKit\Subscriber;
  *
  * - uninstall: Triggered when the plugin is reinstalled or uninstalled. Clean up your tables here.
  */
-class Shopware_Plugins_Frontend_NetiToolKit_Bootstrap extends Shopware_Components_Plugin_Bootstrap
+class Shopware_Plugins_Core_NetiToolKit_Bootstrap extends Shopware_Components_Plugin_Bootstrap
 {
     /**
      * Foundation
