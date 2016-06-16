@@ -43,7 +43,7 @@ We highly appreciate if you want to add further functions and nifty helper tools
 
  - www.shopinventors.de
  - www.netinventors.de
- - The Issues section of this Repo
+ - The [Issues](https://github.com/NetInventors/sw.ext.neti_tool_kit/issues) section of this Repo
 
 ## Contact
 Net Inventors GmbH
