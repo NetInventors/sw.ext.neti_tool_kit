@@ -7,8 +7,8 @@ This little Shopware5 extension prodvides some usefull functions and tools wich 
 
 ## Install:
 1. If you haven't already, download and install our free plugin "[NetiFoundation](http://store.shopware.com/detail/index/sArticle/162025)" from the Shopware Community Store
-2. Download via Shopware Store and install through the Plugin Manager or just clone this repository to the
-*"engine/Shopware/Plugins/Core"* folder, **remember to name the plugin folder "NetiToolKit"**
+2. Download via Shopware Store, [here](https://github.com/NetInventors/sw.ext.neti_tool_kit/releases/latest) or clone this repository to the
+*"engine/Shopware/Plugins/Core"* folder, **remember to name the plugin folder "NetiToolKit"** and install through the Plugin Manager
 
 ##Configuration:
 Because some of these Features were moved from the Net Iventors Foundation Plugin the features **UserData**

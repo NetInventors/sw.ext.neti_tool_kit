@@ -27,7 +27,7 @@ class Shopware_Plugins_Core_NetiToolKit_Bootstrap extends Shopware_Components_Pl
 
     protected static $redmine            = array('000000-012-389', 'hr@netinventors.de');
 
-    protected static $requiredFoundation = '1.9.9';
+    protected static $requiredFoundation = '1.9.10';
 
     protected        $neti;
 
