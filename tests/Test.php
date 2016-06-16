@@ -3,7 +3,7 @@
 class PluginTest extends Shopware\Components\Test\Plugin\TestCase
 {
     protected static $ensureLoadedPlugins = array(
-        'NetiArticleListingProperties' => array(
+        'NetiToolKit' => array(
         )
     );
 
@@ -18,16 +18,16 @@ class PluginTest extends Shopware\Components\Test\Plugin\TestCase
         $pluginDir = getcwd() . '/../';
 
         $loader->registerNamespace(
-            'Shopware\\NetiArticleListingProperties',
+            'Shopware\\NetiToolKit',
             $pluginDir
         );
     }
 
     public function testCanCreateInstance()
     {
-        /** @var Shopware_Plugins_Frontend_NetiArticleListingProperties_Bootstrap $plugin */
-        $plugin = Shopware()->Plugins()->Frontend()->NetiArticleListingProperties();
+        /** @var Shopware_Plugins_Frontend_NetiToolKit_Bootstrap $plugin */
+        $plugin = Shopware()->Plugins()->Frontend()->NetiToolKit();
 
-        $this->assertInstanceOf('Shopware_Plugins_Frontend_NetiArticleListingProperties_Bootstrap', $plugin);
+        $this->assertInstanceOf('Shopware_Plugins_Frontend_NetiToolKit_Bootstrap', $plugin);
     }
 }

@@ -1,7 +1,7 @@
 #!/bin/bash
 WORKING_DIR=$(dirname $0)
 VERSION=$(php -r "echo json_decode(file_get_contents('${WORKING_DIR}/plugin.json'), true)['currentVersion'];")
-TEMP_DIR='/tmp/NetiArticleListingProperties/Frontend/NetiArticleListingProperties'
+TEMP_DIR='/tmp/NetiToolKit/Frontend/NetiToolKit'
 CURRENT_DIR=$(pwd)
 if [ -f "${CURRENT_DIR}/NetiPurchaseHistory-${VERSION}.zip" ]; then
     rm "${CURRENT_DIR}/NetiPurchaseHistory-${VERSION}.zip"
@@ -16,7 +16,7 @@ if [ -d "${TEMP_DIR}/nbproject/" ]; then
     rm "${TEMP_DIR}/nbproject/" -R
 fi
 cd $(dirname $(dirname $TEMP_DIR))
-zip -qr "${CURRENT_DIR}/NetiArticleListingProperties-${VERSION}.zip" $(basename $(dirname $TEMP_DIR))
+zip -qr "${CURRENT_DIR}/NetiToolKit-${VERSION}.zip" $(basename $(dirname $TEMP_DIR))
 cd $CURRENT_DIR
-echo "Package wurde erstellt unter ${CURRENT_DIR}/NetiArticleListingProperties-${VERSION}.zip"
+echo "Package wurde erstellt unter ${CURRENT_DIR}/NetiToolKit-${VERSION}.zip"
 rm -R $(dirname $(dirname $TEMP_DIR))
