@@ -1,5 +1,5 @@
 # Shopware ToolKit
-This little Shopware5 extension prodvides some usefull functions and tools wich every developer needs sometimes
+This Shopware5 extension provides some usefull functions and tools wich every developer needs sometimes.
 
 ## Requirements:
 * Shopware version >= 5.1.0.
@@ -10,16 +10,16 @@ This little Shopware5 extension prodvides some usefull functions and tools wich 
 2. Download via Shopware Store, [here](https://github.com/NetInventors/sw.ext.neti_tool_kit/releases/latest) or clone this repository to the
 *"engine/Shopware/Plugins/Core"* folder, **remember to name the plugin folder "NetiToolKit"** and install through the Plugin Manager
 
-##Configuration:
-Because some of these Features were moved from the Net Iventors Foundation Plugin the features **UserData**
-and **UserLoggedIn** are enabled by default in the Plugin configuration
+## Configuration:
+> Because some of these Features were moved from the Net Inventors Foundation Plugin the features **UserData**
+and **UserLoggedIn** are enabled by default in the Plugin configuration. All other configurations could be enabled in the plugin settings.
 
 ## Use:
-We added the following helpers:
+So far we added following helpers:
 
-### article properties in listing view
-You can just accsses them like in the article details
-* e.g. `{$sArticle.sProperties[20].value}`
+### article properties in article listing
+You can just access them like in the article details
+* e.g. `{$sArticle.sProperties[1].value}`
 
 ### UserData
 If the user is logged in you can access the user infos on every page
@@ -29,25 +29,28 @@ If the user is logged in you can access the user infos on every page
 Here you can check globally if the user is logged in
 * Accessed in Smarty via `{$sUserLoggedIn}`
 
-
 ## VCS
 https://github.com/NetInventors/sw.ext.neti_tool_kit/
 
 ## Changelog
 The changelog and all available commits are located under <https://github.com/NetInventors/sw.ext.neti_tool_kit/commits>.
 
-## Get involved
+## Get involved and let's get better together
 We highly appreciate if you want to add further functions and nifty helper tools. Just fork our plugin and create a pull request.
 
 ## How to report bugs / request features?
 
  - www.shopinventors.de
  - www.netinventors.de
- - The Issues section of this Repo
+ - the issues "[issues](https://github.com/NetInventors/sw.ext.neti_tool_kit/issues)" section of this repo
+
+## License
+
+The MIT License (MIT). Please see License File for more information.
 
 ## Contact
-Net Inventors GmbH
-Stahltwiete 23 // 22761 Hamburg
-T 040 42934714-0  // F 040 42934714-9
+Net Inventors GmbH  
+Stahltwiete 23 // 22761 Hamburg // Germany
+T 040 42934714-0  // F 040 42934714-9  
 www.netinventors.de // info@netinventors.de
 
