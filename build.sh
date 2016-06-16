@@ -1,7 +1,7 @@
 #!/bin/bash
 WORKING_DIR=$(dirname $0)
 VERSION=$(php -r "echo json_decode(file_get_contents('${WORKING_DIR}/plugin.json'), true)['currentVersion'];")
-TEMP_DIR='/tmp/NetiToolKit/Frontend/NetiToolKit'
+TEMP_DIR='/tmp/NetiToolKit/Core/NetiToolKit'
 CURRENT_DIR=$(pwd)
 if [ -f "${CURRENT_DIR}/NetiPurchaseHistory-${VERSION}.zip" ]; then
     rm "${CURRENT_DIR}/NetiPurchaseHistory-${VERSION}.zip"
