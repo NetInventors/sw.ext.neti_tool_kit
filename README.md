@@ -1,10 +1,18 @@
 # Shopware ToolKit
 This little Shopware5 extension prodvides some usefull functions and tools wich every developer needs sometimes
 
+## Requirements:
+* Shopware version >= 5.1.0.
+* NetiFoundation >= 1.9.10
+
 ## Install:
-1. Download and install via Shopware Store our free plugin "[NetiFoundation](http://store.shopware.com/detail/index/sArticle/162025)"
+1. If you haven't already, download and install our free plugin "[NetiFoundation](http://store.shopware.com/detail/index/sArticle/162025)" from the Shopware Community Store
 2. Download via Shopware Store and install through the Plugin Manager or just clone this repository to the
 *"engine/Shopware/Plugins/Core"* folder, **remember to name the plugin folder "NetiToolKit"**
+
+##Configuration:
+Because some of these Features were moved from the Net Iventors Foundation Plugin the features **UserData**
+and **UserLoggedIn** are enabled by default in the Plugin configuration
 
 ## Use:
 We added the following helpers:
