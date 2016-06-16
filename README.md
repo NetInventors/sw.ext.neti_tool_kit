@@ -13,11 +13,11 @@ You can just accsses them like in the article details e.g. "{$sArticle.sProperti
 
 ### UserData
 If the user is logged in you can access the user infos on every page
-Accessed in Smarty via `{$netiUserData}`
+* Accessed in Smarty via `{$netiUserData}`
 
 ### UserLoggedIn
 Here you can check globally if the user is logged in
-Accessed in Smarty via `{$sUserLoggedIn}`
+* Accessed in Smarty via `{$sUserLoggedIn}`
 
 
 ## VCS
