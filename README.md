@@ -49,7 +49,11 @@ We highly appreciate if you want to add further functions and nifty helper tools
 The MIT License (MIT). Please see License File for more information.
 
 ## Contact
-Net Inventors GmbH  
-Stahltwiete 23 // 22761 Hamburg // Germany
-T 040 42934714-0  // F 040 42934714-9  
+**Net Inventors GmbH**
+Stahltwiete 23
+22761 Hamburg
+Germany
+
+T. 040 42934714-0  // F. 040 42934714-9
 www.netinventors.de // info@netinventors.de
+
