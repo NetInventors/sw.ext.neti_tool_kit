@@ -1,4 +1,6 @@
 # Shopware ToolKit
+
+[![Join the chat at https://gitter.im/NetInventors/sw.ext.neti_tool_kit](https://badges.gitter.im/NetInventors/sw.ext.neti_tool_kit.svg)](https://gitter.im/NetInventors/sw.ext.neti_tool_kit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 This Shopware5 extension provides some usefull functions and tools wich every developer needs sometimes.
 
 ## Requirements:
