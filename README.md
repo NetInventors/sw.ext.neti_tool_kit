@@ -1,5 +1,12 @@
 # Shopware ToolKit
-This Shopware5 extension provides some usefull functions and tools wich every developer needs sometimes.
+
+[![Join the chat at https://gitter.im/NetInventors/sw.ext.neti_tool_kit](https://badges.gitter.im/NetInventors/sw.ext.neti_tool_kit.svg)](https://gitter.im/NetInventors/sw.ext.neti_tool_kit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+
+## About Shopware ToolKit
+
+This Shopware extension provides some usefull functions and tools wich every developer needs sometimes.
 
 ## Requirements:
 * Shopware version >= 5.1.0.
@@ -14,8 +21,8 @@ This Shopware5 extension provides some usefull functions and tools wich every de
 > Because some of these Features were moved from the Net Inventors Foundation Plugin the features **UserData**
 and **UserLoggedIn** are enabled by default in the Plugin configuration. All other configurations could be enabled in the plugin settings.
 
-## Use:
-So far we added following helpers:
+## Tools and usage:
+So far we added following tools:
 
 ### article properties in article listing
 You can just access them like in the article details
@@ -45,10 +52,10 @@ We highly appreciate if you want to add further functions and nifty helper tools
  - the issues "[issues](https://github.com/NetInventors/sw.ext.neti_tool_kit/issues)" section of this repo
 
 ## License
-The MIT License (MIT). Please see License File for more information.
+Please see [License File](LICENSE) for more information.
 
 ## Contact
-***Net Inventors GmbH***  
+**Net Inventors GmbH**  
 Stahltwiete 23  
 22761 Hamburg  
 Germany  
