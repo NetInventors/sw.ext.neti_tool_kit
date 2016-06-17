@@ -83,8 +83,6 @@ class GlobalData implements SubscriberInterface
             }
         }
 
-        var_dump($this->pluginConfig->toArray(), $this->userLoggedIn);
-
         if ($this->pluginConfig['globalUserData'] && $this->userLoggedIn) {
             $userData     = Shopware()->Modules()->Admin()->sGetUserData();
             $netiUserData = array(
