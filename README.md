@@ -1,8 +1,7 @@
 # Shopware ToolKit
 
-[![Join the chat at https://gitter.im/NetInventors/sw.ext.neti_tool_kit](https://badges.gitter.im/NetInventors/sw.ext.neti_tool_kit.svg)](https://gitter.im/NetInventors/sw.ext.neti_tool_kit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Join the chat at https://gitter.im/NetInventors/sw.ext.neti_tool_kit](https://badges.gitter.im/NetInventors/sw.ext.neti_tool_kit.svg)](https://gitter.im/NetInventors/sw.ext.neti_tool_kit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## About Shopware ToolKit
 
