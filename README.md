@@ -1,11 +1,11 @@
 # Shopware ToolKit
 
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Join the chat at https://gitter.im/NetInventors/sw.ext.neti_tool_kit](https://badges.gitter.im/NetInventors/sw.ext.neti_tool_kit.svg)](https://gitter.im/NetInventors/sw.ext.neti_tool_kit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## About Shopware ToolKit
+## About ToolKit
 
-This Shopware extension provides some usefull functions and tools wich every developer needs sometimes.
+This plugin for Shopware  provides some usefull functions and tools wich every developer needs sometimes.
 
 ## Requirements:
 * Shopware version >= 5.1.0.
@@ -13,7 +13,7 @@ This Shopware extension provides some usefull functions and tools wich every dev
 
 ## Install:
 1. If you haven't already, download and install our free plugin "[NetiFoundation](http://store.shopware.com/detail/index/sArticle/162025)" from the Shopware Community Store
-2. Download via Shopware Store, [here](https://github.com/NetInventors/sw.ext.neti_tool_kit/releases/latest) or clone this repository to the
+2. Download this plugin via [Shopware Store](http://store.shopware.com/detail/index/sArticle/163077) or clone this repository to the
 *"engine/Shopware/Plugins/Core"* folder, **remember to name the plugin folder "NetiToolKit"** and install through the Plugin Manager
 
 ## Configuration:
@@ -39,7 +39,7 @@ Here you can check globally if the user is logged in
 https://github.com/NetInventors/sw.ext.neti_tool_kit/
 
 ## Changelog
-The changelog and all available commits are located under <https://github.com/NetInventors/sw.ext.neti_tool_kit/commits>.
+The changelog and all available commits are located [here](https://github.com/NetInventors/sw.ext.neti_tool_kit/commits).
 
 ## Get involved and let's get better together
 We highly appreciate if you want to add further functions and nifty helper tools. Just fork our plugin and create a pull request.
