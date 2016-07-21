@@ -31,6 +31,10 @@ class Shopware_Plugins_Core_NetiToolKit_Bootstrap extends Shopware_Components_Pl
 
     protected        $neti;
 
+    /**
+     * @return mixed
+     * @throws Exception
+     */
     public function getVersion()
     {
         $info = json_decode(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'plugin.json'), true);
@@ -41,6 +45,10 @@ class Shopware_Plugins_Core_NetiToolKit_Bootstrap extends Shopware_Components_Pl
         }
     }
 
+    /**
+     * @return mixed
+     * @throws Exception
+     */
     public function getLabel()
     {
         $info = json_decode(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'plugin.json'), true);
@@ -75,27 +83,61 @@ class Shopware_Plugins_Core_NetiToolKit_Bootstrap extends Shopware_Components_Pl
         );
     }
 
+    /**
+     * @return bool
+     */
     public function uninstall()
     {
         return true;
     }
 
+    /**
+     * @param string $oldVersion
+     *
+     * @return bool
+     */
     public function update($oldVersion)
     {
         return $this->Neti()->Setup()->quickUpdate($oldVersion);
     }
 
+    /**
+     * @return bool
+     */
     public function install()
     {
         if (! $this->assertMinimumVersion('5.1.0')) {
             throw new RuntimeException('At least Shopware 5.1.0 is required');
         }
 
+        // Only Event we need, it will register our resources and subscriber classes.
         $this->subscribeEvent(
             'Enlight_Controller_Front_DispatchLoopStartup',
             'onStartDispatch'
         );
 
+        if (! $this->Neti()->Environment()->assertMinimumVersion('5.2.0')) {
+            // Add an Emotion Component for custom HTML Code
+            $emotionComp = $this->createEmotionComponent(
+                [
+                    'name'        => 'ToolKit Custom Code',
+                    'template'    => 'emotion_custom',
+                    'cls'         => 'emotion-tool_kit-element',
+                    'description' => 'Custom HTML/JS Code that will be output as-is in the emotion element.',
+                ]
+            );
+
+            $emotionComp->createTextAreaField(
+                [
+                    'name' => 'html_code',
+                    'fieldLabel' => 'Code:',
+                    'supportText' => 'Enter HTML/JS Code here, it will be not be altered in any way.',
+                    'allowBlank' => false,
+                ]
+            );
+        }
+
+        // Foundation install routine (Black Box :) )
         $this->Neti()->Setup()->quickInstall();
 
         return true;
@@ -111,6 +153,7 @@ class Shopware_Plugins_Core_NetiToolKit_Bootstrap extends Shopware_Components_Pl
     public function onStartDispatch(Enlight_Event_EventArgs $args)
     {
         $this->registerMyComponents();
+        $this->registerTemplateDir();
         $config = $this->Config();
 
         $subscribers = [];
@@ -213,5 +256,13 @@ class Shopware_Plugins_Core_NetiToolKit_Bootstrap extends Shopware_Components_Pl
     public function getRequiredFoundation()
     {
         return self::$requiredFoundation;
+    }
+
+    /**
+     * You get what it says on the tin.
+     */
+    private function registerTemplateDir()
+    {
+        Shopware()->Container()->get('template')->addTemplateDir($this->Path() . 'Views/');
     }
 }
