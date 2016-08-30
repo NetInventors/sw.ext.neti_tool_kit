@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Event Subscriber -->
+        <service id="neti_tool_kit.subscriber.global_data" class="NetiToolKit\Subscriber\GlobalData">
+            <argument type="service" id="neti_foundation.plugin_manager_config"/>
+            <argument type="service" id="session"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="neti_tool_kit.subscriber.listing_properties" class="NetiToolKit\Subscriber\ListingProperties">
+            <argument type="service" id="shopware_storefront.context_service"/>
+            <argument type="service" id="shopware_storefront.property_service"/>
+            <argument type="service" id="legacy_struct_converter"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+    </services>
+</container>
