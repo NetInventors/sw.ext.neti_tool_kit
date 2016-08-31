@@ -14,4 +14,8 @@
         <changes lang="de">SW 5.2.0</changes>
         <changes lang="en">SW 5.2.0</changes>
     </changelog>
+
+    <requiredPlugins>
+        <requiredPlugin pluginName="NetiFoundation" minVersion="2.0.0"/>
+    </requiredPlugins>
 </plugin>

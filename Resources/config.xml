@@ -6,13 +6,13 @@
             <name>listingProperties</name>
             <label lang="de">Artikeleigenschaften im Listing zu Verfügung stellen.</label>
             <label lang="en">Add product properties to listing products.</label>
+            <value>0</value>
             <description lang="de">
                 <![CDATA[ Fügt dem sArticle-Array die Property-Sets hinzu, wie sie auf der Detailseite verfügbar sind. ]]>
             </description>
             <description lang="en">
                 <![CDATA[ Adds the Property sets to the sArticle array in the frontend listing, the same way they are available on the Detail page. ]]>
             </description>
-            <value>0</value>
         </element>
 
         <element scope="shop" type="boolean">
