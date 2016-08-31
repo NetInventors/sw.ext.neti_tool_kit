@@ -8,7 +8,7 @@
     <version>2.0.0</version>
     <link>http://www.shopinventors.de</link>
     <author>Net Inventors GmbH</author>
-    <compatibility minVersion="5.2.0" />
+    <compatibility minVersion="5.2.0"/>
 
     <changelog version="2.0.0">
         <changes lang="de">SW 5.2.0</changes>

@@ -32,10 +32,11 @@ class PluginConfig
     {
         if (is_array($data)) {
             foreach ($data as $name => $value) {
-                if(property_exists($this, $name)) {
+                if (property_exists($this, $name)) {
                     $this->{$name} = $value;
                 } else {
-                    throw new \RuntimeException(sprintf('Trying to set non-existing property "%s::%s"', get_class($this), $name));
+                    throw new \RuntimeException(sprintf('Trying to set non-existing property "%s::%s"',
+                        get_class($this), $name));
                 }
             }
         }

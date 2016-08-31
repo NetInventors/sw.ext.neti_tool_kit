@@ -67,12 +67,14 @@ class GlobalData implements SubscriberInterface
             $this->userLoggedIn = (bool)$this->session->sUserId;
         }
 
+        // assign customer login state to smarty
         if ($this->pluginConfig->isGlobalLoginState()) {
             if ($view->hasTemplate()) {
                 $view->assign('sUserLoggedIn', $this->userLoggedIn);
             }
         }
 
+        // assign userData array to smarty
         if ($this->pluginConfig->isGlobalUserData() && $this->userLoggedIn) {
             $userData     = Shopware()->Modules()->Admin()->sGetUserData();
             $netiUserData = array(

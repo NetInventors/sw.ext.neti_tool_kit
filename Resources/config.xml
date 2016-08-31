@@ -6,7 +6,7 @@
             <name>listingProperties</name>
             <label lang="de">Artikeleigenschaften im Listing zu Verfügung stellen.</label>
             <label lang="en">Add product properties to listing products.</label>
-            <description lang="de">+
+            <description lang="de">
                 <![CDATA[ Fügt dem sArticle-Array die Property-Sets hinzu, wie sie auf der Detailseite verfügbar sind. ]]>
             </description>
             <description lang="en">

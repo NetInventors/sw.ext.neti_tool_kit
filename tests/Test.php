@@ -3,8 +3,7 @@
 class PluginTest extends Shopware\Components\Test\Plugin\TestCase
 {
     protected static $ensureLoadedPlugins = array(
-        'NetiToolKit' => array(
-        )
+        'NetiToolKit' => array()
     );
 
     public function setUp()
@@ -13,7 +12,6 @@ class PluginTest extends Shopware\Components\Test\Plugin\TestCase
 
         $helper = \TestHelper::Instance();
         $loader = $helper->Loader();
-
 
         $pluginDir = getcwd() . '/../';
 
