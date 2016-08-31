@@ -16,6 +16,7 @@
             <argument type="service" id="shopware_storefront.context_service"/>
             <argument type="service" id="shopware_storefront.property_service"/>
             <argument type="service" id="legacy_struct_converter"/>
+            <argument type="service" id="neti_foundation.plugin_manager_config"/>
             <tag name="shopware.event_subscriber"/>
         </service>
     </services>
