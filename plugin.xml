@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../engine/Shopware/Components/Plugin/schema/plugin.xsd">
+
+    <label lang="de">NetiToolKit</label>
+    <label lang="en">NetiToolKit</label>
+
+    <version>2.0.0</version>
+    <link>http://www.shopinventors.de</link>
+    <author>Net Inventors GmbH</author>
+    <compatibility minVersion="5.2.0"/>
+
+    <changelog version="2.0.0">
+        <changes lang="de">SW 5.2.0</changes>
+        <changes lang="en">SW 5.2.0</changes>
+    </changelog>
+
+    <requiredPlugins>
+        <requiredPlugin pluginName="NetiFoundation" minVersion="2.0.0"/>
+    </requiredPlugins>
+</plugin>

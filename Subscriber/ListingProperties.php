@@ -6,39 +6,65 @@
  * Time: 5:11 PM
  */
 
-namespace Shopware\NetiToolKit\Subscriber;
+namespace NetiToolKit\Subscriber;
 
 use Enlight\Event\SubscriberInterface;
+use NetiFoundation\Service\PluginManager\Config;
+use NetiToolKit\Struct\PluginConfig;
+use Shopware\Bundle\StoreFrontBundle\Service\ContextServiceInterface;
+use Shopware\Bundle\StoreFrontBundle\Service\PropertyServiceInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\BaseProduct;
+use Shopware\Components\Compatibility\LegacyStructConverter;
 
 class ListingProperties implements SubscriberInterface
 {
     /**
-     * Returns an array of event names this subscriber wants to listen to.
+     * @var ContextServiceInterface
+     */
+    private $contextService;
+
+    /**
+     * @var PropertyServiceInterface
+     */
+    private $propertyService;
+
+    /**
+     * @var LegacyStructConverter
+     */
+    private $structConverter;
+
+    /**
+     * @var Config
+     */
+    private $configService;
+
+    /**
+     * @var PluginConfig
+     */
+    private $pluginConfig;
+
+    /**
+     * ListingProperties constructor.
      *
-     * The array keys are event names and the value can be:
-     *
-     *  * The method name to call (position defaults to 0)
-     *  * An array composed of the method name to call and the priority
-     *  * An array of arrays composed of the method names to call and respective
-     *    priorities, or 0 if unset
-     *
-     * For instance:
-     *
-     * <code>
-     * return array(
-     *     'eventName0' => 'callback0',
-     *     'eventName1' => array('callback1'),
-     *     'eventName2' => array('callback2', 10),
-     *     'eventName3' => array(
-     *         array('callback3_0', 5),
-     *         array('callback3_1'),
-     *         array('callback3_2')
-     *     )
-     * );
-     *
-     * </code>
-     *
+     * @param ContextServiceInterface  $contextService
+     * @param PropertyServiceInterface $propertyService
+     * @param LegacyStructConverter    $structConverter
+     * @param Config                   $configService
+     */
+    public function __construct(
+        ContextServiceInterface $contextService,
+        PropertyServiceInterface $propertyService,
+        LegacyStructConverter $structConverter,
+        Config $configService
+    ) {
+        $this->contextService  = $contextService;
+        $this->propertyService = $propertyService;
+        $this->structConverter = $structConverter;
+        $this->configService   = $configService;
+        $this->pluginConfig    = $configService->getPluginConfig('NetiToolKit');
+    }
+
+    /**
      * @return array The event names to listen to
      */
     public static function getSubscribedEvents()
@@ -48,18 +74,21 @@ class ListingProperties implements SubscriberInterface
         ];
     }
 
+    /**
+     * @param \Enlight_Hook_HookArgs $args
+     */
     public function afterGetArticlesByCategory(\Enlight_Hook_HookArgs $args)
     {
-        $return          = $args->getReturn();
-        $container       = Shopware()->Container();
-        $context         = $container->get('shopware_storefront.context_service')->getContext();
-        $propertyService = $container->get('shopware_storefront.property_service');
-        $structConverter = $container->get('legacy_struct_converter');
+        if (! $this->pluginConfig->isListingProperties()) {
+            return;
+        }
+
+        $return = $args->getReturn();
 
         //turn sArticles array into BaseProduct Structs
         $products = [];
         foreach ($return['sArticles'] as $sArticle) {
-            $products[ $sArticle['ordernumber'] ] = new BaseProduct(
+            $products[$sArticle['ordernumber']] = new BaseProduct(
                 $sArticle['articleID'],
                 $sArticle['articleDetailsID'],
                 $sArticle['ordernumber']
@@ -67,18 +96,19 @@ class ListingProperties implements SubscriberInterface
         }
 
         // get property set Structs
-        $propertySets = $propertyService->getList($products, $context);
+        $propertySets = $this->propertyService->getList($products, $this->contextService->getContext());
 
         // convert property set Structs to legacy Array format
         $legacyProps = [];
         foreach ($propertySets as $ordernumber => $propertySet) {
-            $legacyProps[ $ordernumber ] = $structConverter->convertPropertySetStruct($propertySet);
+            $legacyProps[$ordernumber] = $this->structConverter->convertPropertySetStruct($propertySet);
         }
 
         // add property arrays to sArticles array
         foreach ($return['sArticles'] as &$sArticle) {
-            $sArticle['sProperties'] = $legacyProps[ $sArticle['ordernumber'] ];
+            $sArticle['sProperties'] = $legacyProps[$sArticle['ordernumber']];
         }
+        unset($sArticle);
 
         $args->setReturn($return);
     }
