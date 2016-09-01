@@ -13,17 +13,17 @@ class PluginConfig
     /**
      * @var bool - Add product properties to listing products.
      */
-    private $listingProperties;
+    private $listingProperties = false;
 
     /**
      * @var bool - provide $sUserLoggedIn globally
      */
-    private $globalLoginState;
+    private $globalLoginState = true;
 
     /**
      * @var bool - provide $netiUserData globally
      */
-    private $globalUserData;
+    private $globalUserData = true;
 
     /**
      * @param array $data
