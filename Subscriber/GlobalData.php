@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: hrombach
- * Date: 6/16/16
- * Time: 12:33 PM
+ * @copyright  Copyright (c) 2016, Net Inventors GmbH
+ * @category   Shopware
+ * @package    Shopware_Plugins
+ * @author     hrombach
  */
 
 namespace NetiToolKit\Subscriber;
