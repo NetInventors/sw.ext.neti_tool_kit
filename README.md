@@ -8,8 +8,8 @@
 This plugin for Shopware  provides some usefull functions and tools wich every developer needs sometimes.
 
 ## Requirements:
-* Shopware version >= 5.1.0.
-* NetiFoundation >= 1.9.10
+* Shopware version >= 5.2.6
+* NetiFoundation >= 2.0.0
 
 ## Install:
 1. If you haven't already, download and install our free plugin "[NetiFoundation](http://store.shopware.com/detail/index/sArticle/162025)" from the Shopware Community Store
