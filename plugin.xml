@@ -16,6 +16,6 @@
     </changelog>
 
     <requiredPlugins>
-        <requiredPlugin pluginName="NetiFoundation" minVersion="2.0.2"/>
+        <requiredPlugin pluginName="NetiFoundation" minVersion="2.0.1"/>
     </requiredPlugins>
 </plugin>
