@@ -2,8 +2,8 @@
 <plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../engine/Shopware/Components/Plugin/schema/plugin.xsd">
 
-    <label lang="de">NetiToolKit</label>
-    <label lang="en">NetiToolKit</label>
+    <label lang="de">ToolKit</label>
+    <label lang="en">ToolKit</label>
 
     <version>2.0.0</version>
     <link>http://www.shopinventors.de</link>
@@ -11,8 +11,8 @@
     <compatibility minVersion="5.2.6"/>
 
     <changelog version="2.0.0">
-        <changes lang="de">SW 5.2.0</changes>
-        <changes lang="en">SW 5.2.0</changes>
+        <changes lang="de">Refactoring</changes>
+        <changes lang="en">Refactoring</changes>
     </changelog>
 
     <requiredPlugins>
