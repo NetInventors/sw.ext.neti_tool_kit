@@ -1,59 +1,48 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: hrombach
- * Date: 6/16/16
- * Time: 12:33 PM
+ * @copyright  Copyright (c) 2016, Net Inventors GmbH
+ * @category   Shopware
+ * @author     hrombach
  */
 
-namespace Shopware\NetiToolKit\Subscriber;
+namespace NetiToolKit\Subscriber;
 
 use Enlight\Event\SubscriberInterface;
+use NetiFoundation\Service\PluginManager\Config;
+use NetiToolKit\Struct\PluginConfig;
 
 class GlobalData implements SubscriberInterface
 {
     /** @var  bool */
     private $userLoggedIn;
 
-    /** @var  \Enlight_Config */
+    /** @var  Config */
+    private $configService;
+
+    /**
+     * @var PluginConfig
+     */
     private $pluginConfig;
+
+    /**
+     * @var \Enlight_Components_Session_Namespace
+     */
+    private $session;
 
     /**
      * GlobalData constructor.
      *
-     * @param \Enlight_Config $pluginConfig
+     * @param Config                                $configService
+     * @param \Enlight_Components_Session_Namespace $session
      */
-    public function __construct(\Enlight_Config $pluginConfig)
+    public function __construct(Config $configService, \Enlight_Components_Session_Namespace $session)
     {
-        $this->pluginConfig = $pluginConfig;
+        $this->configService = $configService;
+        $this->session       = $session;
+        $this->pluginConfig  = $configService->getPluginConfig('NetiToolKit');
     }
 
     /**
-     * Returns an array of event names this subscriber wants to listen to.
-     *
-     * The array keys are event names and the value can be:
-     *
-     *  * The method name to call (position defaults to 0)
-     *  * An array composed of the method name to call and the priority
-     *  * An array of arrays composed of the method names to call and respective
-     *    priorities, or 0 if unset
-     *
-     * For instance:
-     *
-     * <code>
-     * return array(
-     *     'eventName0' => 'callback0',
-     *     'eventName1' => array('callback1'),
-     *     'eventName2' => array('callback2', 10),
-     *     'eventName3' => array(
-     *         array('callback3_0', 5),
-     *         array('callback3_1'),
-     *         array('callback3_2')
-     *     )
-     * );
-     *
-     * </code>
-     *
      * @return array The event names to listen to
      */
     public static function getSubscribedEvents()
@@ -74,16 +63,18 @@ class GlobalData implements SubscriberInterface
         $view = $args->getSubject()->View();
 
         if (null === $this->userLoggedIn) {
-            $this->userLoggedIn = (bool) Shopware()->Session()->offsetGet('sUserId');
+            $this->userLoggedIn = (bool)$this->session->sUserId;
         }
 
-        if ($this->pluginConfig['globalLoginState']) {
+        // assign customer login state to smarty
+        if ($this->pluginConfig->isGlobalLoginState()) {
             if ($view->hasTemplate()) {
                 $view->assign('sUserLoggedIn', $this->userLoggedIn);
             }
         }
 
-        if ($this->pluginConfig['globalUserData'] && $this->userLoggedIn) {
+        // assign userData array to smarty
+        if ($this->pluginConfig->isGlobalUserData() && $this->userLoggedIn) {
             $userData     = Shopware()->Modules()->Admin()->sGetUserData();
             $netiUserData = array(
                 'sUserID'                           => $userData['additional']['user']['id'],
@@ -92,8 +83,8 @@ class GlobalData implements SubscriberInterface
                 'sUserPaymentID'                    => $userData['additional']['user']['paymentID'],
                 'sUserFirstlogin'                   => $userData['additional']['user']['firstlogin'],
                 'sUserLastlogin'                    => $userData['additional']['user']['lastlogin'],
-                'sUserNewsletter'                   => (bool) $userData['additional']['user']['newsletter'],
-                'sUserAffiliate'                    => (bool) $userData['additional']['user']['affiliate'],
+                'sUserNewsletter'                   => (bool)$userData['additional']['user']['newsletter'],
+                'sUserAffiliate'                    => (bool)$userData['additional']['user']['affiliate'],
                 'sUserCustomergroup'                => $userData['additional']['user']['customergroup'],
                 'sUserPaymentpreset'                => $userData['additional']['user']['paymentpreset'],
                 'sUserLanguage'                     => $userData['additional']['user']['language'],

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../engine/Shopware/Components/Plugin/schema/plugin.xsd">
+
+    <label lang="de">ToolKit</label>
+    <label lang="en">ToolKit</label>
+
+    <version>2.0.0</version>
+    <link>http://www.shopinventors.de</link>
+    <author>Net Inventors GmbH</author>
+    <compatibility minVersion="5.2.6"/>
+
+    <changelog version="2.0.0">
+        <changes lang="de">Refaktorierung zur Nutzung des neuen Plugin-Systems</changes>
+        <changes lang="en">Refactoring for the usage of the new plugin system</changes>
+    </changelog>
+
+    <requiredPlugins>
+        <requiredPlugin pluginName="NetiFoundation" minVersion="2.0.3"/>
+    </requiredPlugins>
+</plugin>
