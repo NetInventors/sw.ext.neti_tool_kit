@@ -11,11 +11,11 @@
     <compatibility minVersion="5.2.6"/>
 
     <changelog version="2.0.0">
-        <changes lang="de">Refactoring</changes>
-        <changes lang="en">Refactoring</changes>
+        <changes lang="de">Refaktorierung zur Nutzung des neuen Plugin-Systems</changes>
+        <changes lang="en">Refactoring for the usage of the new plugin system</changes>
     </changelog>
 
     <requiredPlugins>
-        <requiredPlugin pluginName="NetiFoundation" minVersion="2.0.1"/>
+        <requiredPlugin pluginName="NetiFoundation" minVersion="2.0.3"/>
     </requiredPlugins>
 </plugin>

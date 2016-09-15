@@ -7,39 +7,24 @@
 
 namespace NetiToolKit\Struct;
 
-class PluginConfig
+use NetiFoundation\Struct\AbstractClass;
+
+class PluginConfig extends AbstractClass
 {
     /**
      * @var bool - Add product properties to listing products.
      */
-    private $listingProperties = false;
+    protected $listingProperties = false;
 
     /**
      * @var bool - provide $sUserLoggedIn globally
      */
-    private $globalLoginState = true;
+    protected $globalLoginState = true;
 
     /**
      * @var bool - provide $netiUserData globally
      */
-    private $globalUserData = true;
-
-    /**
-     * @param array $data
-     */
-    public function __construct(array $data)
-    {
-        if (is_array($data)) {
-            foreach ($data as $name => $value) {
-                if (property_exists($this, $name)) {
-                    $this->{$name} = $value;
-                } else {
-                    throw new \RuntimeException(sprintf('Trying to set non-existing property "%s::%s"',
-                        get_class($this), $name));
-                }
-            }
-        }
-    }
+    protected $globalUserData = true;
 
     /**
      * @return boolean
@@ -47,18 +32,6 @@ class PluginConfig
     public function isListingProperties()
     {
         return $this->listingProperties;
-    }
-
-    /**
-     * @param boolean $listingProperties
-     *
-     * @return PluginConfig
-     */
-    public function setListingProperties($listingProperties)
-    {
-        $this->listingProperties = $listingProperties;
-
-        return $this;
     }
 
     /**
@@ -70,34 +43,10 @@ class PluginConfig
     }
 
     /**
-     * @param boolean $globalLoginState
-     *
-     * @return PluginConfig
-     */
-    public function setGlobalLoginState($globalLoginState)
-    {
-        $this->globalLoginState = $globalLoginState;
-
-        return $this;
-    }
-
-    /**
      * @return boolean
      */
     public function isGlobalUserData()
     {
         return $this->globalUserData;
-    }
-
-    /**
-     * @param boolean $globalUserData
-     *
-     * @return PluginConfig
-     */
-    public function setGlobalUserData($globalUserData)
-    {
-        $this->globalUserData = $globalUserData;
-
-        return $this;
     }
 }
