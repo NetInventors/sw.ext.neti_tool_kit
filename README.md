@@ -2,7 +2,8 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Join the chat at https://gitter.im/NetInventors/sw.ext.neti_tool_kit](https://badges.gitter.im/NetInventors/sw.ext.neti_tool_kit.svg)](https://gitter.im/NetInventors/sw.ext.neti_tool_kit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/NetInventors/sw.ext.neti_tool_kit/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/NetInventors/sw.ext.neti_tool_kit/?branch=develop)
+[![Build Status](https://scrutinizer-ci.com/g/NetInventors/sw.ext.neti_tool_kit/badges/build.png?b=develop)](https://scrutinizer-ci.com/g/NetInventors/sw.ext.neti_tool_kit/build-status/develop)
 ## About ToolKit
 
 This plugin for Shopware  provides some usefull functions and tools wich every developer needs sometimes.
