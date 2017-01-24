@@ -1,8 +1,10 @@
 <?php
-/**
+
+/*
  * @copyright  Copyright (c) 2016, Net Inventors GmbH
  * @category   Shopware
- * @author     hrombach
+ * @author     Net Inventors GmbH
+ *
  */
 
 namespace NetiToolKit\Subscriber;
@@ -13,10 +15,10 @@ use NetiToolKit\Struct\PluginConfig;
 
 class GlobalData implements SubscriberInterface
 {
-    /** @var  bool */
+    /** @var bool */
     private $userLoggedIn;
 
-    /** @var  Config */
+    /** @var Config */
     private $configService;
 
     /**
@@ -38,8 +40,8 @@ class GlobalData implements SubscriberInterface
     public function __construct(Config $configService, \Enlight_Components_Session_Namespace $session)
     {
         $this->configService = $configService;
-        $this->session       = $session;
-        $this->pluginConfig  = $configService->getPluginConfig('NetiToolKit');
+        $this->session = $session;
+        $this->pluginConfig = $configService->getPluginConfig('NetiToolKit');
     }
 
     /**
@@ -54,7 +56,7 @@ class GlobalData implements SubscriberInterface
     }
 
     /**
-     * Assigns global smarty variables
+     * Assigns global smarty variables.
      *
      * @param \Enlight_Controller_ActionEventArgs $args
      */
@@ -63,7 +65,7 @@ class GlobalData implements SubscriberInterface
         $view = $args->getSubject()->View();
 
         if (null === $this->userLoggedIn) {
-            $this->userLoggedIn = (bool)$this->session->sUserId;
+            $this->userLoggedIn = (bool) $this->session->sUserId;
         }
 
         // assign customer login state to smarty
@@ -75,16 +77,16 @@ class GlobalData implements SubscriberInterface
 
         // assign userData array to smarty
         if ($this->pluginConfig->isGlobalUserData() && $this->userLoggedIn) {
-            $userData     = Shopware()->Modules()->Admin()->sGetUserData();
-            $netiUserData = array(
+            $userData = Shopware()->Modules()->Admin()->sGetUserData();
+            $netiUserData = [
                 'sUserID'                           => $userData['additional']['user']['id'],
                 'sUserEmail'                        => $userData['additional']['user']['email'],
                 'sUserAccountmode'                  => $userData['additional']['user']['accountmode'],
                 'sUserPaymentID'                    => $userData['additional']['user']['paymentID'],
                 'sUserFirstlogin'                   => $userData['additional']['user']['firstlogin'],
                 'sUserLastlogin'                    => $userData['additional']['user']['lastlogin'],
-                'sUserNewsletter'                   => (bool)$userData['additional']['user']['newsletter'],
-                'sUserAffiliate'                    => (bool)$userData['additional']['user']['affiliate'],
+                'sUserNewsletter'                   => (bool) $userData['additional']['user']['newsletter'],
+                'sUserAffiliate'                    => (bool) $userData['additional']['user']['affiliate'],
                 'sUserCustomergroup'                => $userData['additional']['user']['customergroup'],
                 'sUserPaymentpreset'                => $userData['additional']['user']['paymentpreset'],
                 'sUserLanguage'                     => $userData['additional']['user']['language'],
@@ -103,7 +105,7 @@ class GlobalData implements SubscriberInterface
                 'sUserBillingaddressCountryID'      => $userData['billingaddress']['countryID'],
                 'sUserBillingaddressStateID'        => $userData['billingaddress']['stateID'],
                 'sUserBillingaddressBirthday'       => $userData['billingaddress']['birthday'],
-            );
+            ];
             $view->assign('netiUserData', $netiUserData);
         }
     }

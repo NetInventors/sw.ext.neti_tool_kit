@@ -1,8 +1,10 @@
 <?php
-/**
+
+/*
  * @copyright  Copyright (c) 2016, Net Inventors GmbH
  * @category   Shopware
- * @author     hrombach
+ * @author     Net Inventors GmbH
+ *
  */
 
 namespace NetiToolKit\Struct;
@@ -17,17 +19,17 @@ class PluginConfig extends AbstractClass
     protected $listingProperties = false;
 
     /**
-     * @var bool - provide $sUserLoggedIn globally
+     * @var bool - provide globally
      */
     protected $globalLoginState = true;
 
     /**
-     * @var bool - provide $netiUserData globally
+     * @var bool - provide globally
      */
     protected $globalUserData = true;
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isListingProperties()
     {
@@ -35,7 +37,7 @@ class PluginConfig extends AbstractClass
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isGlobalLoginState()
     {
@@ -43,7 +45,7 @@ class PluginConfig extends AbstractClass
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isGlobalUserData()
     {

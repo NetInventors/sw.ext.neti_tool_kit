@@ -1,8 +1,10 @@
 <?php
-/**
+
+/*
  * @copyright  Copyright (c) 2016, Net Inventors GmbH
  * @category   Shopware
- * @author     hrombach
+ * @author     Net Inventors GmbH
+ *
  */
 
 namespace NetiToolKit\Subscriber;
@@ -56,11 +58,11 @@ class ListingProperties implements SubscriberInterface
         LegacyStructConverter $structConverter,
         Config $configService
     ) {
-        $this->contextService  = $contextService;
+        $this->contextService = $contextService;
         $this->propertyService = $propertyService;
         $this->structConverter = $structConverter;
-        $this->configService   = $configService;
-        $this->pluginConfig    = $configService->getPluginConfig('NetiToolKit');
+        $this->configService = $configService;
+        $this->pluginConfig = $configService->getPluginConfig('NetiToolKit');
     }
 
     /**
@@ -69,7 +71,7 @@ class ListingProperties implements SubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'sArticles::sGetArticlesByCategory::after' => 'afterGetArticlesByCategory'
+            'sArticles::sGetArticlesByCategory::after' => 'afterGetArticlesByCategory',
         ];
     }
 
@@ -78,7 +80,7 @@ class ListingProperties implements SubscriberInterface
      */
     public function afterGetArticlesByCategory(\Enlight_Hook_HookArgs $args)
     {
-        if (! $this->pluginConfig->isListingProperties()) {
+        if (!$this->pluginConfig->isListingProperties()) {
             return;
         }
 
