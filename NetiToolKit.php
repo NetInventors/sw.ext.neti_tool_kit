@@ -10,11 +10,11 @@
 namespace NetiToolKit;
 
 use NetiToolKit\CompilerPasses\EmotionComponentPass;
-use Shopware\Components\DependencyInjection\Container;
 use Shopware\Components\Emotion\ComponentInstaller;
 use Shopware\Components\Plugin;
 use Shopware\Components\Plugin\Context\InstallContext;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class NetiToolKit extends Plugin
 {
@@ -25,7 +25,7 @@ class NetiToolKit extends Plugin
     {
         $emotionInstaller = $this->container->get(
             'shopware.emotion_component_installer',
-            Container::NULL_ON_INVALID_REFERENCE
+            ContainerInterface::NULL_ON_INVALID_REFERENCE
         );
 
         if ($emotionInstaller instanceof ComponentInstaller) {
