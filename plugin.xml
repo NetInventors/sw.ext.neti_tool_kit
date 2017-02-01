@@ -14,10 +14,12 @@
         <changes lang="de"><![CDATA[
 [#26336] Attribut-Daten und Firmenname zum UserData-Array hinzugefügt.
 Die Konfigurationsoption für die sUserLoggedIn-Smarty-Variable wurde aus Performance-Gründen entfernt, der Wert wird nun immer ans Template übergeben.
+[#25802] Custom HTML/JS Code Einkaufsweltelement wurde reimplementiert.
 ]]></changes>
         <changes lang="en"><![CDATA[
 [#26336] Added attribute data and company name to user data array.
 The config option to disable the sUserLoggedIn smarty variable was removed for performance reasons. The variable is now always assigned.
+[#25802] Reimplement custom HTML/JS Code emotion component.
 ]]></changes>
     </changelog>
 
