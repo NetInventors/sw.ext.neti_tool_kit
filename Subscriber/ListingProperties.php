@@ -97,7 +97,7 @@ class ListingProperties implements SubscriberInterface
         }
 
         // get property set Structs
-        $propertySets = $this->propertyService->getList($products, $this->contextService->getContext());
+        $propertySets = $this->propertyService->getList($products, $this->contextService->getShopContext());
 
         // convert property set Structs to legacy Array format
         $legacyProps = [];
