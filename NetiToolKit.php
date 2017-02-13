@@ -1,8 +1,10 @@
 <?php
-/**
+
+/*
  * @copyright  Copyright (c) 2016, Net Inventors GmbH
  * @category   Shopware
- * @author     hrombach
+ * @author     Net Inventors GmbH
+ *
  */
 
 namespace NetiToolKit;
