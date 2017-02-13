@@ -1,8 +1,10 @@
 <?php
-/**
+
+/*
  * @copyright  Copyright (c) 2016, Net Inventors GmbH
  * @category   Shopware
- * @author     hrombach
+ * @author     Net Inventors GmbH
+ *
  */
 
 namespace NetiToolKit\Subscriber;
@@ -13,10 +15,10 @@ use NetiToolKit\Struct\PluginConfig;
 
 class GlobalData implements SubscriberInterface
 {
-    /** @var  bool */
+    /** @var bool */
     private $userLoggedIn;
 
-    /** @var  Config */
+    /** @var Config */
     private $configService;
 
     /**
@@ -76,7 +78,7 @@ class GlobalData implements SubscriberInterface
         // assign userData array to smarty
         if ($this->pluginConfig->isGlobalUserData() && $this->userLoggedIn) {
             $userData     = Shopware()->Modules()->Admin()->sGetUserData();
-            $netiUserData = array(
+            $netiUserData = [
                 'sUserID'                           => $userData['additional']['user']['id'],
                 'sUserEmail'                        => $userData['additional']['user']['email'],
                 'sUserAccountmode'                  => $userData['additional']['user']['accountmode'],
@@ -103,7 +105,7 @@ class GlobalData implements SubscriberInterface
                 'sUserBillingaddressCountryID'      => $userData['billingaddress']['countryID'],
                 'sUserBillingaddressStateID'        => $userData['billingaddress']['stateID'],
                 'sUserBillingaddressBirthday'       => $userData['billingaddress']['birthday'],
-            );
+            ];
             $view->assign('netiUserData', $netiUserData);
         }
     }
