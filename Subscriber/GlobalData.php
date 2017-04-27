@@ -12,6 +12,7 @@ namespace NetiToolKit\Subscriber;
 use Enlight\Event\SubscriberInterface;
 use NetiFoundation\Service\PluginManager\Config;
 use NetiToolKit\Struct\PluginConfig;
+use Shopware\Components\Model\ModelManager;
 
 class GlobalData implements SubscriberInterface
 {
@@ -32,16 +33,23 @@ class GlobalData implements SubscriberInterface
     private $session;
 
     /**
+     * @var ModelManager
+     */
+    private $em;
+
+    /**
      * GlobalData constructor.
      *
      * @param Config                                $configService
      * @param \Enlight_Components_Session_Namespace $session
+     * @param ModelManager                          $em
      */
-    public function __construct(Config $configService, \Enlight_Components_Session_Namespace $session)
+    public function __construct(Config $configService, \Enlight_Components_Session_Namespace $session, ModelManager $em)
     {
         $this->configService = $configService;
         $this->session       = $session;
         $this->pluginConfig  = $configService->getPluginConfig('NetiToolKit');
+        $this->em            = $em;
     }
 
     /**
@@ -75,11 +83,14 @@ class GlobalData implements SubscriberInterface
             }
         }
 
+        $netiUserData = [];
+
         // assign userData array to smarty
         if ($this->pluginConfig->isGlobalUserData() && $this->userLoggedIn) {
             $userData     = Shopware()->Modules()->Admin()->sGetUserData();
             $netiUserData = [
                 'sUserID'                           => $userData['additional']['user']['id'],
+                'sUserCompany'                      => $userData['additional']['user']['company'],
                 'sUserEmail'                        => $userData['additional']['user']['email'],
                 'sUserAccountmode'                  => $userData['additional']['user']['accountmode'],
                 'sUserPaymentID'                    => $userData['additional']['user']['paymentID'],
@@ -106,7 +117,31 @@ class GlobalData implements SubscriberInterface
                 'sUserBillingaddressStateID'        => $userData['billingaddress']['stateID'],
                 'sUserBillingaddressBirthday'       => $userData['billingaddress']['birthday'],
             ];
-            $view->assign('netiUserData', $netiUserData);
         }
+
+        if ($this->pluginConfig->getGlobalUserAttributeData() && $this->userLoggedIn)
+        {
+            $userId       = $this->session->offsetGet('sUserId');
+            $customerData = $this->em
+              ->getRepository('Shopware\Models\Customer\Customer')
+              ->findOneBy(array('id' => $userId));
+            foreach ($this->pluginConfig->getGlobalUserAttributeData() as $item) {
+                if ($item === 's_user_addresses_attributes') {
+                    $userAddressAttributes                  = (array)$customerData->getDefaultBillingAddress()->getAttribute();
+                    $netiUserData['sUserAddressAttributes'] = $userAddressAttributes;
+                }
+                if ($item === 's_user_billingaddress_attributes') {
+                    $userBillingAttributes                         = (array)$customerData->getBilling()->getAttribute();
+                    $netiUserData['sUserBillingaddressAttributes'] = $userBillingAttributes;
+                }
+                if ($item === 's_user_shippingaddress_attributes') {
+                    $userShippingAttributes                         = (array)$customerData->getShipping()->getAttribute();
+                    $netiUserData['sUserShippingaddressAttributes'] = $userShippingAttributes;
+                }
+            }
+        }
+
+        $view->assign('netiUserData', $netiUserData);
+
     }
 }

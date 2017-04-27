@@ -29,6 +29,11 @@ class PluginConfig extends AbstractClass
     protected $globalUserData = true;
 
     /**
+     * @var string - provide $netiUserData with attributes globally
+     */
+    protected $globalUserAttributeData;
+
+    /**
      * @return bool
      */
     public function isListingProperties()
@@ -50,5 +55,13 @@ class PluginConfig extends AbstractClass
     public function isGlobalUserData()
     {
         return $this->globalUserData;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGlobalUserAttributeData()
+    {
+        return $this->globalUserAttributeData;
     }
 }
