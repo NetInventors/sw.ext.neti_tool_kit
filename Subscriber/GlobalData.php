@@ -119,12 +119,11 @@ class GlobalData implements SubscriberInterface
             ];
         }
 
-        if ($this->pluginConfig->getGlobalUserAttributeData() && $this->userLoggedIn)
-        {
+        if ($this->pluginConfig->getGlobalUserAttributeData() && $this->userLoggedIn) {
             $userId       = $this->session->offsetGet('sUserId');
             $customerData = $this->em
               ->getRepository('Shopware\Models\Customer\Customer')
-              ->findOneBy(array('id' => $userId));
+              ->findOneBy(['id' => $userId]);
             foreach ($this->pluginConfig->getGlobalUserAttributeData() as $item) {
                 if ($item === 's_user_addresses_attributes') {
                     $userAddressAttributes                  = (array)$customerData->getDefaultBillingAddress()->getAttribute();
@@ -142,6 +141,5 @@ class GlobalData implements SubscriberInterface
         }
 
         $view->assign('netiUserData', $netiUserData);
-
     }
 }
