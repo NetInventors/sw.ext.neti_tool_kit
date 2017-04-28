@@ -1,8 +1,10 @@
 <?php
-/**
+
+/*
  * @copyright  Copyright (c) 2016, Net Inventors GmbH
  * @category   Shopware
- * @author     hrombach
+ * @author     Net Inventors GmbH
+ *
  */
 
 namespace NetiToolKit\Subscriber;
@@ -69,7 +71,7 @@ class ListingProperties implements SubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'sArticles::sGetArticlesByCategory::after' => 'afterGetArticlesByCategory'
+            'sArticles::sGetArticlesByCategory::after' => 'afterGetArticlesByCategory',
         ];
     }
 
@@ -78,30 +80,16 @@ class ListingProperties implements SubscriberInterface
      */
     public function afterGetArticlesByCategory(\Enlight_Hook_HookArgs $args)
     {
-        if (! $this->pluginConfig->isListingProperties()) {
+        if (!$this->pluginConfig->isListingProperties()) {
             return;
         }
 
-        $return = $args->getReturn();
-
-        //turn sArticles array into BaseProduct Structs
-        $products = [];
-        foreach ($return['sArticles'] as $sArticle) {
-            $products[$sArticle['ordernumber']] = new BaseProduct(
-                $sArticle['articleID'],
-                $sArticle['articleDetailsID'],
-                $sArticle['ordernumber']
-            );
-        }
+        $return   = $args->getReturn();
+        $products = $this->getProductStructsFromViewArticles($return['sArticles']);
 
         // get property set Structs
-        $propertySets = $this->propertyService->getList($products, $this->contextService->getContext());
-
-        // convert property set Structs to legacy Array format
-        $legacyProps = [];
-        foreach ($propertySets as $ordernumber => $propertySet) {
-            $legacyProps[$ordernumber] = $this->structConverter->convertPropertySetStruct($propertySet);
-        }
+        $propertySets = $this->propertyService->getList($products, $this->contextService->getShopContext());
+        $legacyProps  = $this->convertPropertyStructs($propertySets);
 
         // add property arrays to sArticles array
         foreach ($return['sArticles'] as &$sArticle) {
@@ -110,5 +98,41 @@ class ListingProperties implements SubscriberInterface
         unset($sArticle);
 
         $args->setReturn($return);
+    }
+
+    /**
+     * @param array $sArticles
+     *
+     * @return BaseProduct[]
+     */
+    private function getProductStructsFromViewArticles(array $sArticles)
+    {
+        //turn sArticles array into BaseProduct Structs
+        $products = [];
+        foreach ($sArticles as $sArticle) {
+            $products[$sArticle['ordernumber']] = new BaseProduct(
+                $sArticle['articleID'],
+                $sArticle['articleDetailsID'],
+                $sArticle['ordernumber']
+            );
+        }
+
+        return $products;
+    }
+
+    /**
+     * @param $propertySets
+     *
+     * @return array
+     */
+    private function convertPropertyStructs($propertySets)
+    {
+        // convert property set Structs to legacy Array format
+        $legacyProps = [];
+        foreach ($propertySets as $ordernumber => $propertySet) {
+            $legacyProps[$ordernumber] = $this->structConverter->convertPropertySetStruct($propertySet);
+        }
+
+        return $legacyProps;
     }
 }
