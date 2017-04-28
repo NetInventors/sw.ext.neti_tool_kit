@@ -11,7 +11,6 @@ return [
     'redmine' => [
         'projectID' => '000000-012-447',
         'contact'   => 'hr@netinventors.de',
-
     ],
     'form'    => [
         [

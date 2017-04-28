@@ -76,7 +76,7 @@ class GlobalData implements SubscriberInterface
         $view = $args->getSubject()->View();
 
         if (null === $this->userLoggedIn) {
-            $this->userLoggedIn = (bool)$this->session->sUserId;
+            $this->userLoggedIn = (bool)$this->session->get('sUserId');
         }
 
         $netiUserData = [];

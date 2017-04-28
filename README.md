@@ -14,7 +14,7 @@ This plugin for Shopware  provides some usefull functions and tools wich every d
 ## Install:
 1. If you haven't already, download and install our free plugin "[NetiFoundation](http://store.shopware.com/detail/index/sArticle/162025)" from the Shopware Community Store
 2. Download this plugin via [Shopware Store](http://store.shopware.com/detail/index/sArticle/163077) or clone this repository to the
-*"engine/Shopware/Plugins/Core"* folder, **remember to name the plugin folder "NetiToolKit"** and install through the Plugin Manager
+*"engine/Shopware/custom/plugins/"* folder, **remember to name the plugin folder "NetiToolKit"** and install through the Plugin Manager
 
 ## Configuration:
 > Because some of these Features were moved from the Net Inventors Foundation Plugin the features **UserData**
@@ -34,6 +34,12 @@ If the user is logged in you can access the user infos on every page
 ### UserLoggedIn
 Here you can check globally if the user is logged in
 * Accessed in Smarty via `{$sUserLoggedIn}`
+
+### Custom HTML / JS Code Emotion component (SW >= 5.2.10)
+An emotion (Shopping worlds) component that enables you to add arbitrary HTML / JS code to shop pages with no 
+filtering or alteration. This differs from the default custom code emotion component in that you can mix JS and HTML code.
+As this code is relayed to the page with no alteration, we take no responsibility for any problems resulting from this. 
+Use at your own risk!
 
 ## VCS
 https://github.com/NetInventors/sw.ext.neti_tool_kit/
