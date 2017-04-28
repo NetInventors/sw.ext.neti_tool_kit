@@ -29,7 +29,7 @@ class PluginConfig extends AbstractClass
     protected $globalUserData = true;
 
     /**
-     * @var string - provide $netiUserData with attributes globally
+     * @var bool - provide $netiUserData with attributes globally
      */
     protected $globalUserAttributeData;
 

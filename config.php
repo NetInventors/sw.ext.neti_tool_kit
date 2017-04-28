@@ -51,23 +51,15 @@ return [
             Shopware\Models\Config\Element::SCOPE_SHOP,
         ],
         [
-            'select',
+            'boolean',
             'globalUserAttributeData',
             [
                 'de_DE' => '$netiUserData global mit attributes bereitstellen',
                 'en_GB' => 'provide $netiUserData with attributes globally',
             ],
             [],
-            '',
+            false,
             Shopware\Models\Config\Element::SCOPE_SHOP,
-            true,
-            [
-                ['s_user_attributes', 's_user_attributes'],
-                ['s_user_addresses_attributes', 's_user_addresses_attributes'],
-                ['s_user_billingaddress_attributes', 's_user_billingaddress_attributes'],
-                ['s_user_shippingaddress_attributes', 's_user_shippingaddress_attributes'],
-            ],
-            true,
         ],
 
     ],
