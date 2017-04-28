@@ -81,11 +81,6 @@ class GlobalData implements SubscriberInterface
 
         $netiUserData = [];
 
-    /**
-     * @param $view
-     */
-    private function handleGlobalUserData(\Enlight_View_Default $view)
-    {
         // assign userData array to smarty
         if ($this->pluginConfig->isGlobalUserData() && $this->userLoggedIn) {
             $this->addUserData($netiUserData);
