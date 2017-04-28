@@ -34,6 +34,17 @@ class NetiToolKit extends Plugin
     }
 
     /**
+     * @param ContainerBuilder $container
+     */
+    public function build(ContainerBuilder $container)
+    {
+        // avoid DI errors in Shopware < 5.2.10
+        $container->addCompilerPass(new EmotionComponentPass());
+
+        parent::build($container);
+    }
+
+    /**
      * @param ComponentInstaller $emotionInstaller
      */
     private function createEmotionComponent(ComponentInstaller $emotionInstaller)
@@ -57,16 +68,5 @@ class NetiToolKit extends Plugin
                 'allowBlank'  => false,
             ]
         );
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     */
-    public function build(ContainerBuilder $container)
-    {
-        // avoid DI errors in Shopware < 5.2.10
-        $container->addCompilerPass(new EmotionComponentPass());
-
-        parent::build($container);
     }
 }
