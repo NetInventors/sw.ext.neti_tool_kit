@@ -19,14 +19,14 @@ class PluginConfig extends AbstractClass
     protected $listingProperties = false;
 
     /**
-     * @var bool - provide $sUserLoggedIn globally
-     */
-    protected $globalLoginState = true;
-
-    /**
      * @var bool - provide $netiUserData globally
      */
     protected $globalUserData = true;
+
+    /**
+     * @var bool - provide $netiUserData with attributes globally
+     */
+    protected $globalUserAttributeData;
 
     /**
      * @return bool
@@ -39,16 +39,16 @@ class PluginConfig extends AbstractClass
     /**
      * @return bool
      */
-    public function isGlobalLoginState()
-    {
-        return $this->globalLoginState;
-    }
-
-    /**
-     * @return bool
-     */
     public function isGlobalUserData()
     {
         return $this->globalUserData;
+    }
+
+    /**
+     * @return string
+     */
+    public function isGlobalUserAttributeData()
+    {
+        return $this->globalUserAttributeData;
     }
 }

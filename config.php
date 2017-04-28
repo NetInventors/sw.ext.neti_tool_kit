@@ -8,12 +8,12 @@
  */
 
 return [
-    'redmine'  => [
+    'redmine' => [
         'projectID' => '000000-012-447',
         'contact'   => 'hr@netinventors.de',
 
     ],
-    'form'     => [
+    'form'    => [
         [
             'boolean',
             'listingProperties',
@@ -30,17 +30,6 @@ return [
         ],
         [
             'boolean',
-            'globalLoginState',
-            [
-                'de_DE' => '$sUserLoggedIn global bereitstellen',
-                'en_GB' => 'provide $sUserLoggedIn globally',
-            ],
-            [],
-            true,
-            Shopware\Models\Config\Element::SCOPE_SHOP,
-        ],
-        [
-            'boolean',
             'globalUserData',
             [
                 'de_DE' => '$netiUserData global bereitstellen',
@@ -50,5 +39,17 @@ return [
             true,
             Shopware\Models\Config\Element::SCOPE_SHOP,
         ],
+        [
+            'boolean',
+            'globalUserAttributeData',
+            [
+                'de_DE' => '$netiUserData global mit attributes bereitstellen',
+                'en_GB' => 'provide $netiUserData with attributes globally',
+            ],
+            [],
+            false,
+            Shopware\Models\Config\Element::SCOPE_SHOP,
+        ],
+
     ],
 ];

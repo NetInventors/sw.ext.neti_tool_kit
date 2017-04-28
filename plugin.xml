@@ -5,10 +5,21 @@
     <label lang="de">ToolKit</label>
     <label lang="en">ToolKit</label>
 
-    <version>2.0.0</version>
+    <version>2.1.0</version>
     <link>http://www.shopinventors.de</link>
     <author>Net Inventors GmbH</author>
     <compatibility minVersion="5.2.6"/>
+
+    <changelog version="2.1.0">
+        <changes lang="de"><![CDATA[
+[#26336] Attribut-Daten und Firmenname zum UserData-Array hinzugefügt.
+Die Konfigurationsoption für die sUserLoggedIn-Smarty-Variable wurde aus Performance-Gründen entfernt, der Wert wird nun immer ans Template übergeben.
+]]></changes>
+        <changes lang="en"><![CDATA[
+[#26336] Added attribute data and company name to user data array.
+The config option to disable the sUserLoggedIn smarty variable was removed for performance reasons. The variable is now always assigned.
+]]></changes>
+    </changelog>
 
     <changelog version="2.0.0">
         <changes lang="de">Refaktorierung zur Nutzung des neuen Plugin-Systems</changes>

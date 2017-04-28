@@ -9,17 +9,19 @@
 
 namespace NetiToolKit\Subscriber;
 
+use Doctrine\ORM\AbstractQuery;
 use Enlight\Event\SubscriberInterface;
-use NetiFoundation\Service\PluginManager\Config;
+use NetiFoundation\Service\PluginManager\ConfigInterface;
 use NetiToolKit\Struct\PluginConfig;
+use Shopware\Components\Model\ModelManager;
+use Shopware\Models\Customer\Customer;
 
 class GlobalData implements SubscriberInterface
 {
-    /** @var bool */
+    /**
+     * @var bool
+     */
     private $userLoggedIn;
-
-    /** @var Config */
-    private $configService;
 
     /**
      * @var PluginConfig
@@ -32,16 +34,25 @@ class GlobalData implements SubscriberInterface
     private $session;
 
     /**
+     * @var ModelManager
+     */
+    private $em;
+
+    /**
      * GlobalData constructor.
      *
-     * @param Config                                $configService
+     * @param ConfigInterface                       $configService
      * @param \Enlight_Components_Session_Namespace $session
+     * @param ModelManager                          $em
      */
-    public function __construct(Config $configService, \Enlight_Components_Session_Namespace $session)
-    {
-        $this->configService = $configService;
-        $this->session       = $session;
-        $this->pluginConfig  = $configService->getPluginConfig('NetiToolKit');
+    public function __construct(
+        ConfigInterface $configService,
+        \Enlight_Components_Session_Namespace $session,
+        ModelManager $em
+    ) {
+        $this->session      = $session;
+        $this->em           = $em;
+        $this->pluginConfig = $configService->getPluginConfig('NetiToolKit');
     }
 
     /**
@@ -50,8 +61,8 @@ class GlobalData implements SubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'Enlight_Controller_Action_PostDispatch_Frontend' => 'addSmartyGlobals',
-            'Enlight_Controller_Action_PostDispatch_Widgets'  => 'addSmartyGlobals',
+            'Enlight_Controller_Action_PostDispatchSecure_Frontend' => 'addSmartyGlobals',
+            'Enlight_Controller_Action_PostDispatchSecure_Widgets'  => 'addSmartyGlobals',
         ];
     }
 
@@ -68,45 +79,88 @@ class GlobalData implements SubscriberInterface
             $this->userLoggedIn = (bool)$this->session->sUserId;
         }
 
-        // assign customer login state to smarty
-        if ($this->pluginConfig->isGlobalLoginState()) {
-            if ($view->hasTemplate()) {
-                $view->assign('sUserLoggedIn', $this->userLoggedIn);
-            }
-        }
+        $netiUserData = [];
 
         // assign userData array to smarty
         if ($this->pluginConfig->isGlobalUserData() && $this->userLoggedIn) {
-            $userData     = Shopware()->Modules()->Admin()->sGetUserData();
-            $netiUserData = [
-                'sUserID'                           => $userData['additional']['user']['id'],
-                'sUserEmail'                        => $userData['additional']['user']['email'],
-                'sUserAccountmode'                  => $userData['additional']['user']['accountmode'],
-                'sUserPaymentID'                    => $userData['additional']['user']['paymentID'],
-                'sUserFirstlogin'                   => $userData['additional']['user']['firstlogin'],
-                'sUserLastlogin'                    => $userData['additional']['user']['lastlogin'],
-                'sUserNewsletter'                   => (bool)$userData['additional']['user']['newsletter'],
-                'sUserAffiliate'                    => (bool)$userData['additional']['user']['affiliate'],
-                'sUserCustomergroup'                => $userData['additional']['user']['customergroup'],
-                'sUserPaymentpreset'                => $userData['additional']['user']['paymentpreset'],
-                'sUserLanguage'                     => $userData['additional']['user']['language'],
-                'sUserSubshopID'                    => $userData['additional']['user']['subshopID'],
-                'sUserPricegroupID'                 => $userData['additional']['user']['pricegroupID'],
-                'sUserInternalcomment'              => $userData['additional']['user']['internalcomment'],
-                'sUserBillingaddressSalutation'     => $userData['billingaddress']['salutation'],
-                'sUserBillingaddressFirstname'      => $userData['billingaddress']['firstname'],
-                'sUserBillingaddressLastname'       => $userData['billingaddress']['lastname'],
-                'sUserBillingaddressCustomernumber' => $userData['billingaddress']['customernumber'],
-                'sUserBillingaddressStreet'         => $userData['billingaddress']['street'],
-                'sUserBillingaddressZipcode'        => $userData['billingaddress']['zipcode'],
-                'sUserBillingaddressCity'           => $userData['billingaddress']['city'],
-                'sUserBillingaddressPhone'          => $userData['billingaddress']['phone'],
-                'sUserBillingaddressFax'            => $userData['billingaddress']['fax'],
-                'sUserBillingaddressCountryID'      => $userData['billingaddress']['countryID'],
-                'sUserBillingaddressStateID'        => $userData['billingaddress']['stateID'],
-                'sUserBillingaddressBirthday'       => $userData['billingaddress']['birthday'],
-            ];
-            $view->assign('netiUserData', $netiUserData);
+            $this->addUserData($netiUserData);
         }
+
+        if ($this->pluginConfig->isGlobalUserAttributeData() && $this->userLoggedIn) {
+            $this->addUserAttributes($netiUserData);
+        }
+
+        $view->assign('sUserLoggedIn', $this->userLoggedIn);
+        $view->assign('netiUserData', $netiUserData);
+    }
+
+    /**
+     * @param $netiUserData
+     *
+     * @return void
+     */
+    private function addUserData(&$netiUserData)
+    {
+        $userData     = Shopware()->Modules()->Admin()->sGetUserData();
+        $netiUserData = [
+            'sUserID'                           => $userData['additional']['user']['id'],
+            'sUserCompany'                      => $userData['additional']['user']['company'],
+            'sUserEmail'                        => $userData['additional']['user']['email'],
+            'sUserAccountmode'                  => $userData['additional']['user']['accountmode'],
+            'sUserPaymentID'                    => $userData['additional']['user']['paymentID'],
+            'sUserFirstlogin'                   => $userData['additional']['user']['firstlogin'],
+            'sUserLastlogin'                    => $userData['additional']['user']['lastlogin'],
+            'sUserNewsletter'                   => (bool)$userData['additional']['user']['newsletter'],
+            'sUserAffiliate'                    => (bool)$userData['additional']['user']['affiliate'],
+            'sUserCustomergroup'                => $userData['additional']['user']['customergroup'],
+            'sUserPaymentpreset'                => $userData['additional']['user']['paymentpreset'],
+            'sUserLanguage'                     => $userData['additional']['user']['language'],
+            'sUserSubshopID'                    => $userData['additional']['user']['subshopID'],
+            'sUserPricegroupID'                 => $userData['additional']['user']['pricegroupID'],
+            'sUserInternalcomment'              => $userData['additional']['user']['internalcomment'],
+            'sUserBillingaddressSalutation'     => $userData['billingaddress']['salutation'],
+            'sUserBillingaddressFirstname'      => $userData['billingaddress']['firstname'],
+            'sUserBillingaddressLastname'       => $userData['billingaddress']['lastname'],
+            'sUserBillingaddressCustomernumber' => $userData['billingaddress']['customernumber'],
+            'sUserBillingaddressStreet'         => $userData['billingaddress']['street'],
+            'sUserBillingaddressZipcode'        => $userData['billingaddress']['zipcode'],
+            'sUserBillingaddressCity'           => $userData['billingaddress']['city'],
+            'sUserBillingaddressPhone'          => $userData['billingaddress']['phone'],
+            'sUserBillingaddressFax'            => $userData['billingaddress']['fax'],
+            'sUserBillingaddressCountryID'      => $userData['billingaddress']['countryID'],
+            'sUserBillingaddressStateID'        => $userData['billingaddress']['stateID'],
+            'sUserBillingaddressBirthday'       => $userData['billingaddress']['birthday'],
+        ];
+    }
+
+    /**
+     * @param $netiUserData
+     *
+     * @return void
+     */
+    private function addUserAttributes(&$netiUserData)
+    {
+        $userId = $this->session->offsetGet('sUserId');
+        $qb     = $this->em->createQueryBuilder();
+        $qb->from(Customer::class, 'c')
+           ->select(['c', 'ca', 'cdb', 'cdba', 'cb', 'cba', 'cs', 'csa'])
+           ->leftJoin('c.attribute', 'ca')
+           ->leftJoin('c.defaultBillingAddress', 'cdb')
+           ->leftJoin('cdb.attribute', 'cdba')
+           ->leftJoin('c.billing', 'cb')
+           ->leftJoin('cb.attribute', 'cba')
+           ->leftJoin('c.shipping', 'cs')
+           ->leftJoin('cs.attribute', 'csa')
+           ->where($qb->expr()->eq('c.id', ':customerId'))
+           ->setMaxResults(1);
+
+        $attributeData = array_shift($qb->getQuery()->execute(['customerId' => $userId], AbstractQuery::HYDRATE_ARRAY));
+
+        $netiUserData += [
+            'sUserAttribute'         => $attributeData['attribute'],
+            'sUserShippingAttribute' => $attributeData['shipping']['attribute'],
+            'sUserBillingAttribute'  => $attributeData['billing']['attribute'],
+            'sUserAddressAttribute'  => $attributeData['defaultBillingAddress']['attribute'],
+        ];
     }
 }
