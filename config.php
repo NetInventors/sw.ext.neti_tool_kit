@@ -7,20 +7,13 @@
  *
  */
 
-$attributes = array(
-  array('s_user_attributes', 's_user_attributes'),
-  array('s_user_addresses_attributes', 's_user_addresses_attributes'),
-  array('s_user_billingaddress_attributes', 's_user_billingaddress_attributes'),
-  array('s_user_shippingaddress_attributes', 's_user_shippingaddress_attributes')
-);
-
 return [
-    'redmine'  => [
+    'redmine' => [
         'projectID' => '000000-012-447',
         'contact'   => 'hr@netinventors.de',
 
     ],
-    'form'     => [
+    'form'    => [
         [
             'boolean',
             'listingProperties',
@@ -68,9 +61,14 @@ return [
             '',
             Shopware\Models\Config\Element::SCOPE_SHOP,
             true,
-            $attributes,
-            true
-        ]
+            [
+                ['s_user_attributes', 's_user_attributes'],
+                ['s_user_addresses_attributes', 's_user_addresses_attributes'],
+                ['s_user_billingaddress_attributes', 's_user_billingaddress_attributes'],
+                ['s_user_shippingaddress_attributes', 's_user_shippingaddress_attributes'],
+            ],
+            true,
+        ],
 
     ],
 ];
