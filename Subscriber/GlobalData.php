@@ -61,8 +61,8 @@ class GlobalData implements SubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'Enlight_Controller_Action_PostDispatch_Frontend' => 'addSmartyGlobals',
-            'Enlight_Controller_Action_PostDispatch_Widgets'  => 'addSmartyGlobals',
+            'Enlight_Controller_Action_PostDispatchSecure_Frontend' => 'addSmartyGlobals',
+            'Enlight_Controller_Action_PostDispatchSecure_Widgets'  => 'addSmartyGlobals',
         ];
     }
 
@@ -86,15 +86,12 @@ class GlobalData implements SubscriberInterface
             $this->addUserData($netiUserData);
         }
 
-        if ($this->pluginConfig->getGlobalUserAttributeData() && $this->userLoggedIn) {
+        if ($this->pluginConfig->isGlobalUserAttributeData() && $this->userLoggedIn) {
             $this->addUserAttributes($netiUserData);
         }
 
-        // assign customer login state to smarty
-        if ($view->hasTemplate()) {
-            $view->assign('sUserLoggedIn', $this->userLoggedIn);
-            $view->assign('netiUserData', $netiUserData);
-        }
+        $view->assign('sUserLoggedIn', $this->userLoggedIn);
+        $view->assign('netiUserData', $netiUserData);
     }
 
     /**

@@ -47,7 +47,7 @@ class PluginConfig extends AbstractClass
     /**
      * @return string
      */
-    public function getGlobalUserAttributeData()
+    public function isGlobalUserAttributeData()
     {
         return $this->globalUserAttributeData;
     }
