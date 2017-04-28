@@ -11,7 +11,7 @@ namespace NetiToolKit\Subscriber;
 
 use Doctrine\ORM\AbstractQuery;
 use Enlight\Event\SubscriberInterface;
-use NetiFoundation\Service\PluginManager\Config;
+use NetiFoundation\Service\PluginManager\ConfigInterface;
 use NetiToolKit\Struct\PluginConfig;
 use Shopware\Components\Model\ModelManager;
 use Shopware\Models\Customer\Customer;
@@ -22,11 +22,6 @@ class GlobalData implements SubscriberInterface
      * @var bool
      */
     private $userLoggedIn;
-
-    /**
-     * @var Config
-     */
-    private $configService;
 
     /**
      * @var PluginConfig
@@ -46,16 +41,18 @@ class GlobalData implements SubscriberInterface
     /**
      * GlobalData constructor.
      *
-     * @param Config                                $configService
+     * @param ConfigInterface                       $configService
      * @param \Enlight_Components_Session_Namespace $session
      * @param ModelManager                          $em
      */
-    public function __construct(Config $configService, \Enlight_Components_Session_Namespace $session, ModelManager $em)
-    {
-        $this->configService = $configService;
-        $this->session       = $session;
-        $this->pluginConfig  = $configService->getPluginConfig('NetiToolKit');
-        $this->em            = $em;
+    public function __construct(
+        ConfigInterface $configService,
+        \Enlight_Components_Session_Namespace $session,
+        ModelManager $em
+    ) {
+        $this->session      = $session;
+        $this->em           = $em;
+        $this->pluginConfig = $configService->getPluginConfig('NetiToolKit');
     }
 
     /**
@@ -82,13 +79,6 @@ class GlobalData implements SubscriberInterface
             $this->userLoggedIn = (bool)$this->session->sUserId;
         }
 
-        // assign customer login state to smarty
-        if ($this->pluginConfig->isGlobalLoginState()) {
-            if ($view->hasTemplate()) {
-                $view->assign('sUserLoggedIn', $this->userLoggedIn);
-            }
-        }
-
         $netiUserData = [];
 
         // assign userData array to smarty
@@ -100,7 +90,11 @@ class GlobalData implements SubscriberInterface
             $this->addUserAttributes($netiUserData);
         }
 
-        $view->assign('netiUserData', $netiUserData);
+        // assign customer login state to smarty
+        if ($view->hasTemplate()) {
+            $view->assign('sUserLoggedIn', $this->userLoggedIn);
+            $view->assign('netiUserData', $netiUserData);
+        }
     }
 
     /**
@@ -152,18 +146,7 @@ class GlobalData implements SubscriberInterface
         $userId = $this->session->offsetGet('sUserId');
         $qb     = $this->em->createQueryBuilder();
         $qb->from(Customer::class, 'c')
-           ->select(
-               [
-                   'c',
-                   'ca',
-                   'cdb',
-                   'cdba',
-                   'cb',
-                   'cba',
-                   'cs',
-                   'csa',
-               ]
-           )
+           ->select(['c', 'ca', 'cdb', 'cdba', 'cb', 'cba', 'cs', 'csa'])
            ->leftJoin('c.attribute', 'ca')
            ->leftJoin('c.defaultBillingAddress', 'cdb')
            ->leftJoin('cdb.attribute', 'cdba')
@@ -171,7 +154,8 @@ class GlobalData implements SubscriberInterface
            ->leftJoin('cb.attribute', 'cba')
            ->leftJoin('c.shipping', 'cs')
            ->leftJoin('cs.attribute', 'csa')
-           ->where($qb->expr()->eq('c.id', ':customerId'))->setMaxResults(1);
+           ->where($qb->expr()->eq('c.id', ':customerId'))
+           ->setMaxResults(1);
 
         $attributeData = array_shift($qb->getQuery()->execute(['customerId' => $userId], AbstractQuery::HYDRATE_ARRAY));
 

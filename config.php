@@ -30,17 +30,6 @@ return [
         ],
         [
             'boolean',
-            'globalLoginState',
-            [
-                'de_DE' => '$sUserLoggedIn global bereitstellen',
-                'en_GB' => 'provide $sUserLoggedIn globally',
-            ],
-            [],
-            true,
-            Shopware\Models\Config\Element::SCOPE_SHOP,
-        ],
-        [
-            'boolean',
             'globalUserData',
             [
                 'de_DE' => '$netiUserData global bereitstellen',
