@@ -45,24 +45,32 @@ class ListingProperties implements SubscriberInterface
     private $pluginConfig;
 
     /**
+     * @var \Shopware_Components_Modules
+     */
+    private $modules;
+
+    /**
      * ListingProperties constructor.
      *
-     * @param ContextServiceInterface  $contextService
-     * @param PropertyServiceInterface $propertyService
-     * @param LegacyStructConverter    $structConverter
-     * @param Config                   $configService
+     * @param ContextServiceInterface      $contextService
+     * @param PropertyServiceInterface     $propertyService
+     * @param LegacyStructConverter        $structConverter
+     * @param Config                       $configService
+     * @param \Shopware_Components_Modules $modules
      */
     public function __construct(
         ContextServiceInterface $contextService,
         PropertyServiceInterface $propertyService,
         LegacyStructConverter $structConverter,
-        Config $configService
+        Config $configService,
+        \Shopware_Components_Modules $modules
     ) {
         $this->contextService  = $contextService;
         $this->propertyService = $propertyService;
         $this->structConverter = $structConverter;
         $this->configService   = $configService;
         $this->pluginConfig    = $configService->getPluginConfig('NetiToolKit');
+        $this->modules         = $modules;
     }
 
     /**
@@ -71,10 +79,28 @@ class ListingProperties implements SubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'sArticles::sGetArticlesByCategory::after' => 'afterGetArticlesByCategory',
-            'Shopware_Controllers_Widgets_Listing::topSellerAction::after' => 'afterTopSellerAction',
-            'Shopware_Controllers_Widgets_Recommendation::boughtAction::after' => 'afterBoughtAction'
+          'Enlight_Controller_Action_PostDispatchSecure_Frontend_Detail'     => 'onPostDispatchFrontendDetail',
+          'sArticles::sGetArticlesByCategory::after'                         => 'afterGetArticlesByCategory',
+          'Shopware_Controllers_Widgets_Listing::topSellerAction::after'     => 'afterTopSellerAction',
+          'Shopware_Controllers_Widgets_Recommendation::boughtAction::after' => 'afterBoughtAction'
         ];
+    }
+
+    /**
+     * @param \Enlight_Controller_ActionEventArgs $args
+     */
+    public function onPostDispatchFrontendDetail(\Enlight_Controller_ActionEventArgs $args)
+    {
+        /** @var \Shopware_Controllers_Frontend_Detail $subject */
+        $view      = $args->getSubject()->View();
+        $sArticles = $view->sArticle;
+
+        // add property arrays to sArticles array
+        foreach ($sArticles['sSimilarArticles'] as $key => $similarArticle) {
+            $sArticles['sSimilarArticles'][$key]['sProperties'] =  $this->modules->Articles()->sGetArticleProperties($similarArticle['articleID']);
+        }
+
+        $view->sArticle = $sArticles;
     }
 
 
@@ -96,9 +122,9 @@ class ListingProperties implements SubscriberInterface
         foreach ($sCharts as &$sArticle) {
             $sArticle['sProperties'] = $legacyProps[$sArticle['ordernumber']];
         }
-        $args->getSubject()->View()->sCharts = $sCharts;
+        unset($sArticle);
 
-        unset($sCharts);
+        $args->getSubject()->View()->sCharts = $sCharts;
     }
 
     public function afterBoughtAction(\Enlight_Hook_HookArgs $args)
@@ -107,10 +133,10 @@ class ListingProperties implements SubscriberInterface
             return;
         }
 
-        $view     = $args->getSubject()->View();
-        $boughtArticles  = $view->boughtArticles;
+        $view           = $args->getSubject()->View();
+        $boughtArticles = $view->boughtArticles;
+        $products       = $this->getProductStructsFromViewArticles($boughtArticles);
 
-        $products = $this->getProductStructsFromViewArticles($boughtArticles);
         // get property set Structs
         $propertySets = $this->propertyService->getList($products, $this->contextService->getShopContext());
         $legacyProps  = $this->convertPropertyStructs($propertySets);
@@ -120,8 +146,9 @@ class ListingProperties implements SubscriberInterface
             $sArticle['sProperties'] = $legacyProps[$sArticle['ordernumber']];
         }
 
+        unset($sArticle);
+
         $args->getSubject()->View()->boughtArticles = $boughtArticles;
-        unset($boughtArticles);
     }
 
     /**
@@ -143,7 +170,6 @@ class ListingProperties implements SubscriberInterface
         // add property arrays to sArticles array
         foreach ($return['sArticles'] as &$sArticle) {
             $sArticle['sProperties'] = $legacyProps[$sArticle['ordernumber']];
-            $sArticle['sSimilarArticles']['sProperties'] = 'test';
         }
 
         unset($sArticle);

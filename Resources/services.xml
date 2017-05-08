@@ -5,6 +5,18 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="modules" class="Shopware_Components_Modules" synthetic="true"/>
+
+        <!-- Decorations -->
+        <service decorates="shopware_storefront.similar_products_service" id="neti_tool_kit.service.decorations.similar_products_service"
+                 class="NetiToolKit\Service\Decorations\SimilarProductsService"
+                 decoration-inner-name="core_service">
+            <argument type="service" id="core_service" />
+            <argument type="service" id="neti_foundation.plugin_manager_config" />
+            <argument type="service" id="shopware_storefront.property_service"/>
+            <argument type="service" id="shopware_storefront.context_service"/>
+        </service>
+
         <!-- Event Subscriber -->
         <service id="neti_tool_kit.subscriber.global_data" class="NetiToolKit\Subscriber\GlobalData">
             <argument type="service" id="neti_foundation.plugin_manager_config"/>
@@ -18,6 +30,7 @@
             <argument type="service" id="shopware_storefront.property_service"/>
             <argument type="service" id="legacy_struct_converter"/>
             <argument type="service" id="neti_foundation.plugin_manager_config"/>
+            <argument type="service" id="modules" />
             <tag name="shopware.event_subscriber"/>
         </service>
 
