@@ -90,6 +90,34 @@ class FrontendProperties implements SubscriberInterface
     }
 
     /**
+     * @param \Enlight_Controller_ActionEventArgs $args
+     */
+    public function addPropsToTopSellers(\Enlight_Controller_ActionEventArgs $args)
+    {
+        $this->assignPropertiesToAction($args, 'sCharts');
+    }
+
+    /**
+     * @param \Enlight_Controller_ActionEventArgs $args
+     */
+    public function addPropsToBought(\Enlight_Controller_ActionEventArgs $args)
+    {
+        $this->assignPropertiesToAction($args, 'boughtArticles');
+    }
+
+    /**
+     * @param \Enlight_Hook_HookArgs $args
+     */
+    public function afterGetArticlesByCategory(\Enlight_Hook_HookArgs $args)
+    {
+        if (in_array(PluginConfig::SHOW_PROPERTIES_ON_LISTING, $this->pluginConfig->getShowPropertiesOn())) {
+            return;
+        }
+
+        $args->setReturn($this->addPropertiesToArticlesArray($args->getReturn()));
+    }
+
+    /**
      * @param array $articles
      *
      * @return array
@@ -149,11 +177,6 @@ class FrontendProperties implements SubscriberInterface
         return $products;
     }
 
-    public function addPropsToTopSellers(\Enlight_Controller_ActionEventArgs $args)
-    {
-        $this->assignPropertiesToAction($args, 'sCharts');
-    }
-
     /**
      * @param \Enlight_Controller_ActionEventArgs $args
      * @param string                              $spec
@@ -166,22 +189,5 @@ class FrontendProperties implements SubscriberInterface
 
         $view = $args->getSubject()->View();
         $view->assign($spec, $this->addPropertiesToArticlesArray($view->getAssign($spec)));
-    }
-
-    public function addPropsToBought(\Enlight_Controller_ActionEventArgs $args)
-    {
-        $this->assignPropertiesToAction($args, 'boughtArticles');
-    }
-
-    /**
-     * @param \Enlight_Hook_HookArgs $args
-     */
-    public function afterGetArticlesByCategory(\Enlight_Hook_HookArgs $args)
-    {
-        if (in_array(PluginConfig::SHOW_PROPERTIES_ON_LISTING, $this->pluginConfig->getShowPropertiesOn())) {
-            return;
-        }
-
-        $args->setReturn($this->addPropertiesToArticlesArray($args->getReturn()));
     }
 }
