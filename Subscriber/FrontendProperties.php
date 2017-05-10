@@ -89,38 +89,6 @@ class FrontendProperties implements SubscriberInterface
         $view->sArticle = $sArticle;
     }
 
-    public function addPropsToTopSellers(\Enlight_Controller_ActionEventArgs $args)
-    {
-        if (!in_array($args->getRequest()->getActionName(), $this->pluginConfig->getShowPropertiesOn())) {
-            return;
-        }
-
-        $view          = $args->getSubject()->View();
-        $view->sCharts = $this->addPropertiesToArticlesArray($view->sCharts);
-    }
-
-    public function addPropsToBought(\Enlight_Controller_ActionEventArgs $args)
-    {
-        if (!in_array($args->getRequest()->getActionName(), $this->pluginConfig->getShowPropertiesOn())) {
-            return;
-        }
-
-        $view                 = $args->getSubject()->View();
-        $view->boughtArticles = $this->addPropertiesToArticlesArray($view->boughtArticles);
-    }
-
-    /**
-     * @param \Enlight_Hook_HookArgs $args
-     */
-    public function afterGetArticlesByCategory(\Enlight_Hook_HookArgs $args)
-    {
-        if (in_array(PluginConfig::SHOW_PROPERTIES_ON_LISTING, $this->pluginConfig->getShowPropertiesOn())) {
-            return;
-        }
-
-        $args->setReturn($this->addPropertiesToArticlesArray($args->getReturn()));
-    }
-
     /**
      * @param array $articles
      *
@@ -179,5 +147,41 @@ class FrontendProperties implements SubscriberInterface
         }
 
         return $products;
+    }
+
+    public function addPropsToTopSellers(\Enlight_Controller_ActionEventArgs $args)
+    {
+        $this->assignPropertiesToAction($args, 'sCharts');
+    }
+
+    /**
+     * @param \Enlight_Controller_ActionEventArgs $args
+     * @param string                              $spec
+     */
+    private function assignPropertiesToAction(\Enlight_Controller_ActionEventArgs $args, $spec)
+    {
+        if (!in_array($args->getRequest()->getActionName(), $this->pluginConfig->getShowPropertiesOn())) {
+            return;
+        }
+
+        $view = $args->getSubject()->View();
+        $view->assign($spec, $this->addPropertiesToArticlesArray($view->getAssign($spec)));
+    }
+
+    public function addPropsToBought(\Enlight_Controller_ActionEventArgs $args)
+    {
+        $this->assignPropertiesToAction($args, 'boughtArticles');
+    }
+
+    /**
+     * @param \Enlight_Hook_HookArgs $args
+     */
+    public function afterGetArticlesByCategory(\Enlight_Hook_HookArgs $args)
+    {
+        if (in_array(PluginConfig::SHOW_PROPERTIES_ON_LISTING, $this->pluginConfig->getShowPropertiesOn())) {
+            return;
+        }
+
+        $args->setReturn($this->addPropertiesToArticlesArray($args->getReturn()));
     }
 }
