@@ -35,19 +35,9 @@ class FrontendProperties implements SubscriberInterface
     private $structConverter;
 
     /**
-     * @var Config
-     */
-    private $configService;
-
-    /**
      * @var PluginConfig
      */
     private $pluginConfig;
-
-    /**
-     * @var \Shopware_Components_Modules
-     */
-    private $modules;
 
     /**
      * FrontendProperties constructor.
@@ -66,7 +56,6 @@ class FrontendProperties implements SubscriberInterface
         $this->contextService  = $contextService;
         $this->propertyService = $propertyService;
         $this->structConverter = $structConverter;
-        $this->configService   = $configService;
         $this->pluginConfig    = $configService->getPluginConfig('NetiToolKit');
     }
 
@@ -76,10 +65,10 @@ class FrontendProperties implements SubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
+            'Enlight_Controller_Action_PostDispatchSecure_Widgets_Recommendation' => 'addPropsToBought',
+            'Enlight_Controller_Action_PostDispatchSecure_Widgets_Listing'        => 'addPropsToTopSellers',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Detail'        => 'onPostDispatchFrontendDetail',
             'sArticles::sGetArticlesByCategory::after'                            => 'afterGetArticlesByCategory',
-            'Enlight_Controller_Action_PostDispatchSecure_Widgets_Listing'        => 'addPropsToTopSellers',
-            'Enlight_Controller_Action_PostDispatchSecure_Widgets_Recommendation' => 'addPropsToBought',
         ];
     }
 
@@ -88,6 +77,10 @@ class FrontendProperties implements SubscriberInterface
      */
     public function onPostDispatchFrontendDetail(\Enlight_Controller_ActionEventArgs $args)
     {
+        if (!in_array(PluginConfig::SHOW_PROPERTIES_ON_SIMILAR_ARTICLES, $this->pluginConfig->getShowPropertiesOn())) {
+            return;
+        }
+
         /** @var \Shopware_Controllers_Frontend_Detail $subject */
         $view                         = $args->getSubject()->View();
         $sArticle                     = $view->sArticle;
@@ -158,7 +151,7 @@ class FrontendProperties implements SubscriberInterface
 
     public function addPropsToTopSellers(\Enlight_Controller_ActionEventArgs $args)
     {
-        if ('topSeller' !== $args->getRequest()->getActionName() || !$this->pluginConfig->isListingProperties()) {
+        if (!in_array($args->getRequest()->getActionName(), $this->pluginConfig->getShowPropertiesOn())) {
             return;
         }
 
@@ -168,7 +161,7 @@ class FrontendProperties implements SubscriberInterface
 
     public function addPropsToBought(\Enlight_Controller_ActionEventArgs $args)
     {
-        if ('bought' !== $args->getRequest()->getActionName() || !$this->pluginConfig->isListingProperties()) {
+        if (!in_array($args->getRequest()->getActionName(), $this->pluginConfig->getShowPropertiesOn())) {
             return;
         }
 
@@ -181,7 +174,7 @@ class FrontendProperties implements SubscriberInterface
      */
     public function afterGetArticlesByCategory(\Enlight_Hook_HookArgs $args)
     {
-        if (!$this->pluginConfig->isListingProperties()) {
+        if (in_array(PluginConfig::SHOW_PROPERTIES_ON_LISTING, $this->pluginConfig->getShowPropertiesOn())) {
             return;
         }
 

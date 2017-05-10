@@ -13,10 +13,10 @@ use NetiFoundation\Struct\AbstractClass;
 
 class PluginConfig extends AbstractClass
 {
-    /**
-     * @var bool - Add product properties to listing products.
-     */
-    protected $listingProperties = false;
+    const SHOW_PROPERTIES_ON_SIMILAR_ARTICLES = 'similarArticles';
+    const SHOW_PROPERTIES_ON_TOP_SELLER       = 'topSeller';
+    const SHOW_PROPERTIES_ON_LISTING          = 'listing';
+    const SHOW_PROPERTIES_ON_BOUGHT           = 'bought';
 
     /**
      * @var bool - provide $netiUserData globally
@@ -26,14 +26,20 @@ class PluginConfig extends AbstractClass
     /**
      * @var bool - provide $netiUserData with attributes globally
      */
-    protected $globalUserAttributeData;
+    protected $globalUserAttributeData = false;
 
     /**
-     * @return bool
+     * @var array - Add product properties in the following places
+     *            for possible values see SHOW_PROPERTIES_ON_* class constants
      */
-    public function isListingProperties()
+    protected $showPropertiesOn = ['listing'];
+
+    /**
+     * @return array
+     */
+    public function getShowPropertiesOn()
     {
-        return $this->listingProperties;
+        return $this->showPropertiesOn;
     }
 
     /**
