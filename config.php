@@ -14,18 +14,30 @@ return [
     ],
     'form'    => [
         [
-            'boolean',
-            'listingProperties',
-            [
-                'de_DE' => 'Artikeleigenschaften im Listing zu Verfügung stellen',
-                'en_GB' => 'Add product properties to listing products',
+            'type'        => 'select',
+            'name'        => 'showPropertiesOn',
+            'label'       => [
+                'de_DE' => 'Artikeleigenschaften an folgenden Stellen zu Verfügung stellen',
+                'en_GB' => 'Add product properties in the following places',
             ],
-            [
+            'description' => [
                 'de_DE' => 'Fügt dem sArticle-Array die Property-Sets hinzu, wie sie auf der Detailseite verfügbar sind.',
                 'en_GB' => 'Adds the Property sets to the sArticle array in the frontend listing, the same way they are available on the Detail page.',
             ],
-            false,
-            Shopware\Models\Config\Element::SCOPE_SHOP,
+            'value'       => ['listing'],
+            'scope'       => \Shopware\Models\Config\Element::SCOPE_SHOP,
+            'isRequired'  => false,
+            'store'       => [
+                ['listing', ['de_DE' => 'Kategorieseite', 'en_GB' => 'Category page']],
+                ['similarArticles', ['de_DE' => 'Ähnliche Artikel', 'en_GB' => 'Similar articles']],
+                ['bought', ['de_DE' => 'Kunden kauften auch', 'en_GB' => 'Bought articles']],
+                ['topSeller', ['de_DE' => 'TopSeller', 'en_GB' => 'TopSellers']],
+            ],
+            'options'     => [
+                'multiSelect'    => true,
+                'editable'       => false,
+                'forceSelection' => false,
+            ],
         ],
         [
             'boolean',
