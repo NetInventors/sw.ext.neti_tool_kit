@@ -67,54 +67,29 @@ class FrontendProperties implements SubscriberInterface
         return [
             'Enlight_Controller_Action_PostDispatchSecure_Widgets_Recommendation' => 'addPropsToBought',
             'Enlight_Controller_Action_PostDispatchSecure_Widgets_Listing'        => 'addPropsToTopSellers',
+            'Enlight_Controller_Action_PostDispatchSecure_Widgets_Emotion'        => 'addPropsToEmotion',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Detail'        => 'onPostDispatchFrontendDetail',
             'sArticles::sGetArticlesByCategory::after'                            => 'afterGetArticlesByCategory',
         ];
     }
 
+    public function addPropsToEmotion(\Enlight_Controller_ActionEventArgs $args)
+    {
+        $this->assignPropertiesToAction($args, 'articles');
+    }
+
     /**
      * @param \Enlight_Controller_ActionEventArgs $args
+     * @param string                              $spec
      */
-    public function onPostDispatchFrontendDetail(\Enlight_Controller_ActionEventArgs $args)
+    private function assignPropertiesToAction(\Enlight_Controller_ActionEventArgs $args, $spec)
     {
-        if (!in_array(PluginConfig::SHOW_PROPERTIES_ON_SIMILAR_ARTICLES, $this->pluginConfig->getShowPropertiesOn())) {
+        if (!in_array($args->getRequest()->getActionName(), $this->pluginConfig->getShowPropertiesOn())) {
             return;
         }
 
-        /** @var \Shopware_Controllers_Frontend_Detail $subject */
-        $view                         = $args->getSubject()->View();
-        $sArticle                     = $view->sArticle;
-        $sArticle['sSimilarArticles'] = $this->addPropertiesToArticlesArray($sArticle['sSimilarArticles']);
-
-        $view->sArticle = $sArticle;
-    }
-
-    /**
-     * @param \Enlight_Controller_ActionEventArgs $args
-     */
-    public function addPropsToTopSellers(\Enlight_Controller_ActionEventArgs $args)
-    {
-        $this->assignPropertiesToAction($args, 'sCharts');
-    }
-
-    /**
-     * @param \Enlight_Controller_ActionEventArgs $args
-     */
-    public function addPropsToBought(\Enlight_Controller_ActionEventArgs $args)
-    {
-        $this->assignPropertiesToAction($args, 'boughtArticles');
-    }
-
-    /**
-     * @param \Enlight_Hook_HookArgs $args
-     */
-    public function afterGetArticlesByCategory(\Enlight_Hook_HookArgs $args)
-    {
-        if (in_array(PluginConfig::SHOW_PROPERTIES_ON_LISTING, $this->pluginConfig->getShowPropertiesOn())) {
-            return;
-        }
-
-        $args->setReturn($this->addPropertiesToArticlesArray($args->getReturn()));
+        $view = $args->getSubject()->View();
+        $view->assign($spec, $this->addPropertiesToArticlesArray($view->getAssign($spec)));
     }
 
     /**
@@ -179,15 +154,50 @@ class FrontendProperties implements SubscriberInterface
 
     /**
      * @param \Enlight_Controller_ActionEventArgs $args
-     * @param string                              $spec
      */
-    private function assignPropertiesToAction(\Enlight_Controller_ActionEventArgs $args, $spec)
+    public function onPostDispatchFrontendDetail(\Enlight_Controller_ActionEventArgs $args)
     {
-        if (!in_array($args->getRequest()->getActionName(), $this->pluginConfig->getShowPropertiesOn())) {
+        if (!in_array(PluginConfig::SHOW_PROPERTIES_ON_SIMILAR_ARTICLES, $this->pluginConfig->getShowPropertiesOn())) {
             return;
         }
 
-        $view = $args->getSubject()->View();
-        $view->assign($spec, $this->addPropertiesToArticlesArray($view->getAssign($spec)));
+        /** @var \Shopware_Controllers_Frontend_Detail $subject */
+        $view                         = $args->getSubject()->View();
+        $sArticle                     = $view->sArticle;
+        $sArticle['sSimilarArticles'] = $this->addPropertiesToArticlesArray($sArticle['sSimilarArticles']);
+
+        $view->sArticle = $sArticle;
+    }
+
+    /**
+     * @param \Enlight_Controller_ActionEventArgs $args
+     */
+    public function addPropsToTopSellers(\Enlight_Controller_ActionEventArgs $args)
+    {
+        $this->assignPropertiesToAction($args, 'sCharts');
+    }
+
+    /**
+     * @param \Enlight_Controller_ActionEventArgs $args
+     */
+    public function addPropsToBought(\Enlight_Controller_ActionEventArgs $args)
+    {
+        $this->assignPropertiesToAction($args, 'boughtArticles');
+    }
+
+    /**
+     * @param \Enlight_Hook_HookArgs $args
+     *
+     * @return mixed
+     */
+    public function afterGetArticlesByCategory(\Enlight_Hook_HookArgs $args)
+    {
+        if (!in_array(PluginConfig::SHOW_PROPERTIES_ON_LISTING, $this->pluginConfig->getShowPropertiesOn())) {
+            return $args->getReturn();
+        }
+
+        $return              = $args->getReturn();
+        $return['sArticles'] = $this->addPropertiesToArticlesArray($return['sArticles']);
+        $args->setReturn($return);
     }
 }

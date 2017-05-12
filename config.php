@@ -32,6 +32,10 @@ return [
                 ['similarArticles', ['de_DE' => 'Ähnliche Artikel', 'en_GB' => 'Similar articles']],
                 ['bought', ['de_DE' => 'Kunden kauften auch', 'en_GB' => 'Bought articles']],
                 ['topSeller', ['de_DE' => 'TopSeller', 'en_GB' => 'TopSellers']],
+                [
+                    'emotionArticleSlider',
+                    ['de_DE' => 'Artikel-Slider-Einkaufsweltelement', 'en_GB' => 'Article slider emotion component'],
+                ],
             ],
             'options'     => [
                 'multiSelect'    => true,
