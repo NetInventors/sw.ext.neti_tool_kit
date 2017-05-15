@@ -13,10 +13,11 @@ use NetiFoundation\Struct\AbstractClass;
 
 class PluginConfig extends AbstractClass
 {
-    const SHOW_PROPERTIES_ON_SIMILAR_ARTICLES = 'similarArticles';
-    const SHOW_PROPERTIES_ON_TOP_SELLER       = 'topSeller';
-    const SHOW_PROPERTIES_ON_LISTING          = 'listing';
-    const SHOW_PROPERTIES_ON_BOUGHT           = 'bought';
+    const SHOW_PROPERTIES_ON_EMOTION_ARTICLE_SLIDER = 'emotionArticleSlider';
+    const SHOW_PROPERTIES_ON_SIMILAR_ARTICLES       = 'similarArticles';
+    const SHOW_PROPERTIES_ON_TOP_SELLER             = 'topSeller';
+    const SHOW_PROPERTIES_ON_LISTING                = 'listing';
+    const SHOW_PROPERTIES_ON_BOUGHT                 = 'bought';
 
     /**
      * @var bool - provide $netiUserData globally
