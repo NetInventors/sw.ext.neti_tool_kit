@@ -5,10 +5,15 @@
     <label lang="de">ToolKit</label>
     <label lang="en">ToolKit</label>
 
-    <version>2.2.0</version>
+    <version>2.2.1</version>
     <link>http://www.shopinventors.de</link>
     <author>Net Inventors GmbH</author>
     <compatibility minVersion="5.2.6"/>
+
+    <changelog version="2.2.1">
+        <changes lang="de"><![CDATA[[#26409] Behebt einen Fehler im Frontend, wenn keine Option für sProperties gewählt wurde und verbessert die Unterstützung der TopSeller und Artikel-Slider.]]></changes>
+        <changes lang="en"><![CDATA[[#26409] Fixed an error in the frontend if no option was selected for sProperties and improves support for TopSellers and article sliders.]]></changes>
+    </changelog>
 
     <changelog version="2.2.0">
         <changes lang="de"><![CDATA[[#26381] Property Eigenschaften überall verfügbar machen.]]></changes>
@@ -34,6 +39,6 @@ The config option to disable the sUserLoggedIn smarty variable was removed for p
     </changelog>
 
     <requiredPlugins>
-        <requiredPlugin pluginName="NetiFoundation" minVersion="2.0.3"/>
+        <requiredPlugin pluginName="NetiFoundation" minVersion="2.1.8"/>
     </requiredPlugins>
 </plugin>
