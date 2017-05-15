@@ -28,7 +28,7 @@ enabled:
   - no_useless_return # There should not be an empty return statement at the end of a function
   - no_whitespace_in_blank_line # Remove trailing whitespace at the end of blank lines
   - object_operator_without_whitespace # There should not be space before or after object T_OBJECT_OPERATOR
-  - ordered_class_elements # Orders the elements of classes/interfaces/traits
+  #- ordered_class_elements # Orders the elements of classes/interfaces/traits
   - phpdoc_add_missing_param_annotation # phpdoc_add_missing_param_annotation
   - phpdoc_align # All items of the @param, @throws, @return, @var, and @type phpdoc tags must be aligned vertically
   - phpdoc_indent # Docblocks should have the same indentation as the documented subject
