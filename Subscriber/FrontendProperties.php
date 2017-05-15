@@ -66,30 +66,20 @@ class FrontendProperties implements SubscriberInterface
     {
         return [
             'Enlight_Controller_Action_PostDispatchSecure_Widgets_Recommendation' => 'addPropsToBought',
-            'Enlight_Controller_Action_PostDispatchSecure_Widgets_Listing'        => 'addPropsToTopSellers',
             'Enlight_Controller_Action_PostDispatchSecure_Widgets_Emotion'        => 'addPropsToEmotion',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Detail'        => 'onPostDispatchFrontendDetail',
             'sArticles::sGetArticlesByCategory::after'                            => 'afterGetArticlesByCategory',
+            'sArticles::sGetArticleCharts::after'                                 => 'afterGetArticleCharts',
         ];
     }
 
-    public function addPropsToEmotion(\Enlight_Controller_ActionEventArgs $args)
+    public function afterGetArticleCharts(\Enlight_Hook_HookArgs $args)
     {
-        $this->assignPropertiesToAction($args, 'articles');
-    }
-
-    /**
-     * @param \Enlight_Controller_ActionEventArgs $args
-     * @param string                              $spec
-     */
-    private function assignPropertiesToAction(\Enlight_Controller_ActionEventArgs $args, $spec)
-    {
-        if (!in_array($args->getRequest()->getActionName(), $this->pluginConfig->getShowPropertiesOn())) {
+        if (!in_array(PluginConfig::SHOW_PROPERTIES_ON_TOP_SELLER, $this->pluginConfig->getShowPropertiesOn())) {
             return;
         }
 
-        $view = $args->getSubject()->View();
-        $view->assign($spec, $this->addPropertiesToArticlesArray($view->getAssign($spec)));
+        $args->setReturn($this->addPropertiesToArticlesArray((array)$args->getReturn()));
     }
 
     /**
@@ -152,6 +142,25 @@ class FrontendProperties implements SubscriberInterface
         return $products;
     }
 
+    public function addPropsToEmotion(\Enlight_Controller_ActionEventArgs $args)
+    {
+        $this->assignPropertiesToAction($args, 'articles');
+    }
+
+    /**
+     * @param \Enlight_Controller_ActionEventArgs $args
+     * @param string                              $spec
+     */
+    private function assignPropertiesToAction(\Enlight_Controller_ActionEventArgs $args, $spec)
+    {
+        if (!in_array($args->getRequest()->getActionName(), $this->pluginConfig->getShowPropertiesOn())) {
+            return;
+        }
+
+        $view = $args->getSubject()->View();
+        $view->assign($spec, $this->addPropertiesToArticlesArray($view->getAssign($spec)));
+    }
+
     /**
      * @param \Enlight_Controller_ActionEventArgs $args
      */
@@ -167,14 +176,6 @@ class FrontendProperties implements SubscriberInterface
         $sArticle['sSimilarArticles'] = $this->addPropertiesToArticlesArray($sArticle['sSimilarArticles']);
 
         $view->sArticle = $sArticle;
-    }
-
-    /**
-     * @param \Enlight_Controller_ActionEventArgs $args
-     */
-    public function addPropsToTopSellers(\Enlight_Controller_ActionEventArgs $args)
-    {
-        $this->assignPropertiesToAction($args, 'sCharts');
     }
 
     /**
