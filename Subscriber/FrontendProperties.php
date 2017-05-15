@@ -73,6 +73,9 @@ class FrontendProperties implements SubscriberInterface
         ];
     }
 
+    /**
+     * @param \Enlight_Hook_HookArgs $args
+     */
     public function afterGetArticleCharts(\Enlight_Hook_HookArgs $args)
     {
         if (!in_array(PluginConfig::SHOW_PROPERTIES_ON_TOP_SELLER, $this->pluginConfig->getShowPropertiesOn())) {
