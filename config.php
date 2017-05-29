@@ -36,6 +36,10 @@ return [
                     'emotionArticleSlider',
                     ['de_DE' => 'Artikel-Slider-Einkaufsweltelement', 'en_GB' => 'Article slider emotion component'],
                 ],
+                [
+                    'productStreamArticleSlider',
+                    ['de_DE' => 'Product-Streams auf Artikelseite', 'en_GB' => 'Article page product streams'],
+                ],
             ],
             'options'     => [
                 'multiSelect'    => true,
