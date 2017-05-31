@@ -5,10 +5,15 @@
     <label lang="de">ToolKit</label>
     <label lang="en">ToolKit</label>
 
-    <version>2.2.1</version>
+    <version>2.3.0</version>
     <link>http://www.shopinventors.de</link>
     <author>Net Inventors GmbH</author>
     <compatibility minVersion="5.2.6"/>
+
+    <changelog version="2.3.0">
+        <changes lang="de"><![CDATA[[#26437] Artikel-Eingenschaften sind jetzt auch im Zuberhör-Reiter und in Product-Streams verfügbar.]]></changes>
+        <changes lang="en"><![CDATA[[#26437] Properties are now available in the related articles tab and in product streams.]]></changes>
+    </changelog>
 
     <changelog version="2.2.1">
         <changes lang="de"><![CDATA[[#26409] Behebt einen Fehler im Frontend, wenn keine Option für sProperties gewählt wurde und verbessert die Unterstützung der TopSeller und Artikel-Slider.]]></changes>
