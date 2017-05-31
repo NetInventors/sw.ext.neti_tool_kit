@@ -177,6 +177,7 @@ class FrontendProperties implements SubscriberInterface
         $view                         = $args->getSubject()->View();
         $sArticle                     = $view->sArticle;
         $sArticle['sSimilarArticles'] = $this->addPropertiesToArticlesArray($sArticle['sSimilarArticles']);
+        $sArticle['sRelatedArticles'] = $this->addPropertiesToArticlesArray($sArticle['sRelatedArticles']);
 
         $view->sArticle = $sArticle;
     }
