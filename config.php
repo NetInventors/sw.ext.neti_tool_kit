@@ -29,7 +29,7 @@ return [
             'isRequired'  => false,
             'store'       => [
                 ['listing', ['de_DE' => 'Kategorieseite', 'en_GB' => 'Category page']],
-                ['similarArticles', ['de_DE' => 'Ähnliche Artikel', 'en_GB' => 'Similar articles']],
+                ['similarArticles', ['de_DE' => 'Ähnliche Artikel / Zubehör', 'en_GB' => 'Similar / similar articles']],
                 ['bought', ['de_DE' => 'Kunden kauften auch', 'en_GB' => 'Bought articles']],
                 ['topSeller', ['de_DE' => 'TopSeller', 'en_GB' => 'TopSellers']],
                 [
