@@ -44,6 +44,6 @@ The config option to disable the sUserLoggedIn smarty variable was removed for p
     </changelog>
 
     <requiredPlugins>
-        <requiredPlugin pluginName="NetiFoundation" minVersion="2.1.8"/>
+        <requiredPlugin pluginName="NetiFoundation" minVersion="2.3.4"/>
     </requiredPlugins>
 </plugin>
