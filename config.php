@@ -23,8 +23,8 @@ return [
                     'de_DE' => 'Im Frontend verstecken',
                     'en_GB' => 'Hide in frontend',
                 ],
-                'displayInBackend' => true
-            ]
+                'displayInBackend' => true,
+            ],
         ],
     ],
     'form'    => [

@@ -1,8 +1,10 @@
 <?php
-/**
- * @copyright  Copyright (c) 2017, Net Inventors GmbH
+
+/*
+ * @copyright  Copyright (c) 2016, Net Inventors GmbH
  * @category   Shopware
- * @author     hrombach
+ * @author     Net Inventors GmbH
+ *
  */
 
 namespace NetiToolKit\Subscriber;
@@ -32,7 +34,7 @@ class TemplateDir implements SubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'Enlight_Controller_Action_PostDispatchSecure_Frontend_Detail' => 'onPostDispatchSecureFrontendDetail'
+            'Enlight_Controller_Action_PostDispatchSecure_Frontend_Detail' => 'onPostDispatchSecureFrontendDetail',
         ];
     }
 
