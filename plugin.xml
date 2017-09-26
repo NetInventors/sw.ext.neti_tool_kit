@@ -5,10 +5,15 @@
     <label lang="de">ToolKit</label>
     <label lang="en">ToolKit</label>
 
-    <version>2.3.0</version>
+    <version>2.4.0</version>
     <link>http://www.shopinventors.de</link>
     <author>Net Inventors GmbH</author>
     <compatibility minVersion="5.2.6"/>
+
+    <changelog version="2.4.0">
+        <changes lang="de"><![CDATA[[#27354] Artikel-Eigenschaften können im Frontend ausgeblendet werden.]]></changes>
+        <changes lang="en"><![CDATA[[#27354] Added option to hide properties from frontend.]]></changes>
+    </changelog>
 
     <changelog version="2.3.0">
         <changes lang="de"><![CDATA[[#26437] Artikel-Eingenschaften sind jetzt auch im Zuberhör-Reiter und in Product-Streams verfügbar.]]></changes>
