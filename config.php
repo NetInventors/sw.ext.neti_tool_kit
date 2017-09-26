@@ -14,14 +14,40 @@ return [
     ],
     'attributes' => [
         [
-            'table'  => 's_filter_options_attributes',
+            'table'  => 's_filter_attributes',
             'prefix' => 'neti_tool_kit',
-            'suffix' => 'hide_in_frontend',
+            'suffix' => 'display_in_frontend',
             'type'   => 'boolean',
             'data'   => [
                 'label'            => [
-                    'de_DE' => 'Im Frontend verstecken',
-                    'en_GB' => 'Hide in frontend',
+                    'de_DE' => 'Im Frontend ausgeben',
+                    'en_GB' => 'Display in frontend',
+                ],
+                'displayInBackend' => true
+            ]
+        ],
+        [
+            'table'  => 's_filter_options_attributes',
+            'prefix' => 'neti_tool_kit',
+            'suffix' => 'display_in_frontend',
+            'type'   => 'boolean',
+            'data'   => [
+                'label'            => [
+                    'de_DE' => 'Im Frontend ausgeben',
+                    'en_GB' => 'Display in frontend',
+                ],
+                'displayInBackend' => true
+            ]
+        ],
+        [
+            'table'  => 's_filter_values_attributes',
+            'prefix' => 'neti_tool_kit',
+            'suffix' => 'display_in_frontend',
+            'type'   => 'boolean',
+            'data'   => [
+                'label'            => [
+                    'de_DE' => 'Im Frontend ausgeben',
+                    'en_GB' => 'Display in frontend',
                 ],
                 'displayInBackend' => true,
             ],
