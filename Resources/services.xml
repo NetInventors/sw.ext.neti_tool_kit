@@ -21,8 +21,7 @@
             <tag name="shopware.event_subscriber"/>
         </service>
 
-        <service id="neti_tool_kit.subscriber.template_dir" class="NetiToolKit\Subscriber\TemplateDir">
-            <argument>%neti_tool_kit.plugin_dir%</argument>
+        <service id="neti_tool_kit.subscriber.frontend_detail" class="NetiToolKit\Subscriber\FrontendDetail">
             <tag name="shopware.event_subscriber"/>
         </service>
 
