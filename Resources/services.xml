@@ -21,6 +21,10 @@
             <tag name="shopware.event_subscriber"/>
         </service>
 
+        <service id="neti_tool_kit.subscriber.frontend_detail" class="NetiToolKit\Subscriber\FrontendDetail">
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
         <!-- Emotion event subscriber -->
         <service id="neti_tool_kit.emotion_view_subscriber"
                  class="Shopware\Components\Emotion\EmotionComponentViewSubscriber">
