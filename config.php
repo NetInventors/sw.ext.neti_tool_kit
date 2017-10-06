@@ -12,6 +12,34 @@ return [
         'projectID' => '000000-012-447',
         'contact'   => 'hr@netinventors.de',
     ],
+    'attributes' => [
+        [
+            'table'  => 's_filter_options_attributes',
+            'prefix' => 'neti_tool_kit',
+            'suffix' => 'hide_in_frontend',
+            'type'   => 'boolean',
+            'data'   => [
+                'label'            => [
+                    'de_DE' => 'Im Frontend verstecken',
+                    'en_GB' => 'Hide in frontend',
+                ],
+                'displayInBackend' => true,
+            ],
+        ],
+        [
+            'table'  => 's_filter_values_attributes',
+            'prefix' => 'neti_tool_kit',
+            'suffix' => 'hide_in_frontend',
+            'type'   => 'boolean',
+            'data'   => [
+                'label'            => [
+                    'de_DE' => 'Im Frontend verstecken',
+                    'en_GB' => 'Hide in frontend',
+                ],
+                'displayInBackend' => true,
+            ],
+        ],
+    ],
     'form'    => [
         [
             'type'        => 'select',

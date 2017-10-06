@@ -20,6 +20,8 @@ class NetiToolKit extends Plugin
 {
     /**
      * @param InstallContext $context
+     *
+     * @throws \Exception
      */
     public function install(InstallContext $context)
     {
@@ -34,31 +36,37 @@ class NetiToolKit extends Plugin
     }
 
     /**
-     * @param ContainerBuilder $container
-     */
-    public function build(ContainerBuilder $container)
-    {
-        // avoid DI errors in Shopware < 5.2.10
-        $container->addCompilerPass(new EmotionComponentPass());
-
-        parent::build($container);
-    }
-
-    /**
      * @param ComponentInstaller $emotionInstaller
+     *
+     * @throws \Exception
      */
     private function createEmotionComponent(ComponentInstaller $emotionInstaller)
     {
-        $customCodeElement = $emotionInstaller->createOrUpdate(
-            $this->getName(),
-            'Custom HTML/JS',
-            [
-                'name'        => 'ToolKit Custom Code',
-                'template'    => 'neti_tool_kit_emotion_custom',
-                'cls'         => 'emotion-tool_kit-element',
-                'description' => 'Custom HTML/JS Code that will be output as-is in the emotion element.',
-            ]
-        );
+        try {
+            $customCodeElement = $emotionInstaller->createOrUpdate(
+                $this->getName(),
+                'Custom HTML/JS',
+                [
+                    'name'        => 'ToolKit Custom Code',
+                    'template'    => 'neti_tool_kit_emotion_custom',
+                    'cls'         => 'emotion-tool_kit-element',
+                    'description' => 'Custom HTML/JS Code that will be output as-is in the emotion element.',
+                ]
+            );
+        } catch (\Exception $e) {
+            $this->container->get('pluginlogger')
+                            ->error(
+                                sprintf(
+                                    '%s in %s on line %d: "%s"',
+                                    get_class($e),
+                                    __FILE__,
+                                    __LINE__,
+                                    $e->getMessage()
+                                )
+                            );
+
+            throw $e;
+        }
 
         $customCodeElement->createTextAreaField(
             [
@@ -68,5 +76,16 @@ class NetiToolKit extends Plugin
                 'allowBlank'  => false,
             ]
         );
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    public function build(ContainerBuilder $container)
+    {
+        // avoid DI errors in Shopware < 5.2.10
+        $container->addCompilerPass(new EmotionComponentPass());
+
+        parent::build($container);
     }
 }
