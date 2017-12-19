@@ -84,7 +84,7 @@ class FrontendProperties implements SubscriberInterface
     {
         $elementArray = $args->getReturn();
 
-        if (! \in_array(PluginConfig::SHOW_PROPERTIES_ON_EMOTION_ARTICLE_SLIDER,
+        if (!\in_array(PluginConfig::SHOW_PROPERTIES_ON_EMOTION_ARTICLE_SLIDER,
             $this->pluginConfig->getShowPropertiesOn(),
             true
         )) {
