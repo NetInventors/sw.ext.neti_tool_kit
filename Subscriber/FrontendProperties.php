@@ -12,6 +12,7 @@ namespace NetiToolKit\Subscriber;
 use Enlight\Event\SubscriberInterface;
 use NetiFoundation\Service\PluginManager\Config;
 use NetiToolKit\Struct\PluginConfig;
+use Shopware\Bundle\EmotionBundle\ComponentHandler\ArticleSliderComponentHandler;
 use Shopware\Bundle\StoreFrontBundle\Service\ContextServiceInterface;
 use Shopware\Bundle\StoreFrontBundle\Service\PropertyServiceInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\BaseProduct;
@@ -70,7 +71,31 @@ class FrontendProperties implements SubscriberInterface
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Detail'        => 'onPostDispatchFrontendDetail',
             'sArticles::sGetArticlesByCategory::after'                            => 'afterGetArticlesByCategory',
             'sArticles::sGetArticleCharts::after'                                 => 'afterGetArticleCharts',
+            'Legacy_Struct_Converter_Convert_Emotion_Element'                     => 'filterConvertedEmotionComponent',
         ];
+    }
+
+    /**
+     * @param \Enlight_Event_EventArgs $args
+     *
+     * @return mixed
+     */
+    public function filterConvertedEmotionComponent(\Enlight_Event_EventArgs $args)
+    {
+        $elementArray = $args->getReturn();
+
+        if (!\in_array(PluginConfig::SHOW_PROPERTIES_ON_EMOTION_ARTICLE_SLIDER,
+            $this->pluginConfig->getShowPropertiesOn(),
+            true
+        )) {
+            return $elementArray;
+        }
+
+        if (ArticleSliderComponentHandler::COMPONENT_NAME === $elementArray['component']['type']) {
+            $elementArray['data']['values'] = $this->addPropertiesToArticlesArray($elementArray['data']['values']);
+        }
+
+        return $elementArray;
     }
 
     /**
@@ -114,7 +139,7 @@ class FrontendProperties implements SubscriberInterface
      *
      * @return array
      */
-    private function convertPropertyStructs($propertySets)
+    private function convertPropertyStructs(array $propertySets)
     {
         // convert property set Structs to legacy Array format
         $legacyProps = [];
