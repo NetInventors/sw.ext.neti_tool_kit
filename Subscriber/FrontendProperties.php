@@ -117,6 +117,10 @@ class FrontendProperties implements SubscriberInterface
      */
     private function addPropertiesToArticlesArray(array $articles)
     {
+        if ([] === $articles) {
+            return [];
+        }
+
         // get property set Structs
         $legacyProps = $this->convertPropertyStructs(
             $this->propertyService->getList(
