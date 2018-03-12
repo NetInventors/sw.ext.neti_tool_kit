@@ -47,6 +47,8 @@ class FrontendProperties implements SubscriberInterface
      * @param PropertyServiceInterface $propertyService
      * @param LegacyStructConverter    $structConverter
      * @param Config                   $configService
+     *
+     * @throws \Exception
      */
     public function __construct(
         ContextServiceInterface $contextService,
@@ -103,7 +105,7 @@ class FrontendProperties implements SubscriberInterface
      */
     public function afterGetArticleCharts(\Enlight_Hook_HookArgs $args)
     {
-        if (!in_array(PluginConfig::SHOW_PROPERTIES_ON_TOP_SELLER, $this->pluginConfig->getShowPropertiesOn())) {
+        if (!in_array(PluginConfig::SHOW_PROPERTIES_ON_TOP_SELLER, $this->pluginConfig->getShowPropertiesOn(), true)) {
             return;
         }
 
@@ -115,9 +117,9 @@ class FrontendProperties implements SubscriberInterface
      *
      * @return array
      */
-    private function addPropertiesToArticlesArray(array $articles)
+    private function addPropertiesToArticlesArray(array $articles = null)
     {
-        if ([] === $articles) {
+        if ([] === $articles || null === $articles) {
             return [];
         }
 
@@ -185,7 +187,7 @@ class FrontendProperties implements SubscriberInterface
      */
     private function assignPropertiesToAction(\Enlight_Controller_ActionEventArgs $args, $spec)
     {
-        if (!in_array($args->getRequest()->getActionName(), $this->pluginConfig->getShowPropertiesOn())) {
+        if (!in_array($args->getRequest()->getActionName(), $this->pluginConfig->getShowPropertiesOn(), true)) {
             return;
         }
 
@@ -198,17 +200,20 @@ class FrontendProperties implements SubscriberInterface
      */
     public function onPostDispatchFrontendDetail(\Enlight_Controller_ActionEventArgs $args)
     {
-        if (!in_array(PluginConfig::SHOW_PROPERTIES_ON_SIMILAR_ARTICLES, $this->pluginConfig->getShowPropertiesOn())) {
+        if (!in_array(
+            PluginConfig::SHOW_PROPERTIES_ON_SIMILAR_ARTICLES,
+            $this->pluginConfig->getShowPropertiesOn(),
+            true
+        )) {
             return;
         }
 
-        /** @var \Shopware_Controllers_Frontend_Detail $subject */
         $view                         = $args->getSubject()->View();
-        $sArticle                     = $view->sArticle;
+        $sArticle                     = $view->getAssign('sArticle');
         $sArticle['sSimilarArticles'] = $this->addPropertiesToArticlesArray($sArticle['sSimilarArticles']);
         $sArticle['sRelatedArticles'] = $this->addPropertiesToArticlesArray($sArticle['sRelatedArticles']);
 
-        $view->sArticle = $sArticle;
+        $view->assign('sArticle', $sArticle);
     }
 
     /**
@@ -226,12 +231,15 @@ class FrontendProperties implements SubscriberInterface
      */
     public function afterGetArticlesByCategory(\Enlight_Hook_HookArgs $args)
     {
-        if (!in_array(PluginConfig::SHOW_PROPERTIES_ON_LISTING, $this->pluginConfig->getShowPropertiesOn())) {
-            return $args->getReturn();
+        $return = $args->getReturn();
+
+        if (!in_array(PluginConfig::SHOW_PROPERTIES_ON_LISTING, $this->pluginConfig->getShowPropertiesOn(), true)) {
+            return $return;
         }
 
-        $return              = $args->getReturn();
         $return['sArticles'] = $this->addPropertiesToArticlesArray($return['sArticles']);
         $args->setReturn($return);
+
+        return $return;
     }
 }
