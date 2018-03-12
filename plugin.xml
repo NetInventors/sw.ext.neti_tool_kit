@@ -19,7 +19,7 @@
 ]]></changes>
     </changelog>
 
-    <changelog version="2.4.3">
+    <changelog version="2.4.2">
         <changes lang="de"><![CDATA[
 [#22](GitHub) Behebt einen Fehler, der auftrat, falls Artikel für Kundengruppen gesperrt oder nicht lagernd sind. (@wizmobln)
 ]]></changes>
