@@ -5,10 +5,19 @@
     <label lang="de">ToolKit</label>
     <label lang="en">ToolKit</label>
 
-    <version>2.4.3</version>
+    <version>2.4.4</version>
     <link>http://www.shopinventors.de</link>
     <author>Net Inventors GmbH</author>
     <compatibility minVersion="5.2.6"/>
+
+    <changelog version="2.4.4">
+        <changes lang="de"><![CDATA[
+[#28995] "Unified Session Service" aus Foundation implementieren
+]]></changes>
+        <changes lang="en"><![CDATA[
+[#28995]Implement "Unified Session Service" from Foundation
+]]></changes>
+    </changelog>
 
     <changelog version="2.4.3">
         <changes lang="de"><![CDATA[
@@ -76,6 +85,6 @@ The config option to disable the sUserLoggedIn smarty variable was removed for p
     </changelog>
 
     <requiredPlugins>
-        <requiredPlugin pluginName="NetiFoundation" minVersion="2.3.4"/>
+        <requiredPlugin pluginName="NetiFoundation" minVersion="2.4.4"/>
     </requiredPlugins>
 </plugin>
