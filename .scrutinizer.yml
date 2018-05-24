@@ -1,0 +1,18 @@
+build:
+    nodes:
+        analysis:
+            dependencies:
+                before:
+                    - git clone https://github.com/NetInventors/sw.ext.neti_foundation.git
+            environment:
+                php:
+                    version: 7.2.0       # Common versions: 5.4, 5.5, 5.6, 7.0 or hhvm
+
+filter:
+    dependency_paths:
+        - "sw.ext.neti_foundation/*"
+
+checks:
+    php:
+        code_rating: true
+        duplication: true
