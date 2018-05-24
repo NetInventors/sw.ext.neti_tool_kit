@@ -8,7 +8,7 @@
         <!-- Event Subscriber -->
         <service id="neti_tool_kit.subscriber.global_data" class="NetiToolKit\Subscriber\GlobalData">
             <argument type="service" id="neti_foundation.plugin_manager_config"/>
-            <argument type="service" id="session"/>
+            <argument type="service" id="neti_foundation.session"/>
             <argument type="service" id="models"/>
             <tag name="shopware.event_subscriber"/>
         </service>
