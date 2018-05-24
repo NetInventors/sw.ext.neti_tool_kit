@@ -154,7 +154,8 @@ class GlobalData implements SubscriberInterface
            ->where($qb->expr()->eq('c.id', ':customerId'))
            ->setMaxResults(1);
 
-        $attributeData = array_shift($qb->getQuery()->execute(['customerId' => $userId], AbstractQuery::HYDRATE_ARRAY));
+        $result        = $qb->getQuery()->execute(['customerId' => $userId], AbstractQuery::HYDRATE_ARRAY);
+        $attributeData = array_shift($result);
 
         $netiUserData += [
             'sUserAttribute'         => $attributeData['attribute'],

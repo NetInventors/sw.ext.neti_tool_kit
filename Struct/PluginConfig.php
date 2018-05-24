@@ -52,7 +52,7 @@ class PluginConfig extends AbstractClass
     }
 
     /**
-     * @return string
+     * @return bool
      */
     public function isGlobalUserAttributeData()
     {
