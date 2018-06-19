@@ -1,8 +1,8 @@
+**NOTE**: If you are viewing this on GitHub, please be advised that the repo has been moved to [GitLab](https://gitlab.netinventors.de/-/ide/project/shopware/labs/NetiToolKit) and we will no longer respond to Pull Requests on this repo, as it is only a mirror of the GitLab repository.
+
+
 # Shopware ToolKit
 
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/NetInventors/sw.ext.neti_tool_kit/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/NetInventors/sw.ext.neti_tool_kit/?branch=develop)
-[![Build Status](https://scrutinizer-ci.com/g/NetInventors/sw.ext.neti_tool_kit/badges/build.png?b=develop)](https://scrutinizer-ci.com/g/NetInventors/sw.ext.neti_tool_kit/build-status/develop)
 ## About ToolKit
 
 This plugin for Shopware  provides some usefull functions and tools wich every developer needs sometimes.
@@ -41,12 +41,6 @@ filtering or alteration. This differs from the default custom code emotion compo
 As this code is relayed to the page with no alteration, we take no responsibility for any problems resulting from this. 
 Use at your own risk!
 
-## VCS
-https://github.com/NetInventors/sw.ext.neti_tool_kit/
-
-## Changelog
-The changelog and all available commits are located [here](https://github.com/NetInventors/sw.ext.neti_tool_kit/commits).
-
 ## Get involved and let's get better together
 We highly appreciate if you want to add further functions and nifty helper tools. Just fork our plugin and create a pull request.
 
@@ -54,7 +48,6 @@ We highly appreciate if you want to add further functions and nifty helper tools
 
  - www.shopinventors.de
  - www.netinventors.de
- - the issues "[issues](https://github.com/NetInventors/sw.ext.neti_tool_kit/issues)" section of this repo
 
 ## License
 Please see [License File](LICENSE) for more information.
