@@ -1,4 +1,4 @@
-**NOTE**: If you are viewing this on GitHub, please be advised that the repo has been moved to [GitLab](https://gitlab.netinventors.de/-/ide/project/shopware/labs/NetiToolKit) and we will no longer respond to Pull Requests on this repo, as it is only a mirror of the GitLab repository.
+**NOTE**: If you are viewing this on GitHub, please be advised that the repo has been moved to [GitLab](https://gitlab.netinventors.de/shopware/labs/NetiToolKit) and we will no longer respond to Pull Requests on this repo, as it is only a mirror of the GitLab repository.
 
 
 # Shopware ToolKit
