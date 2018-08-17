@@ -73,8 +73,25 @@ class FrontendProperties implements SubscriberInterface
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Detail'        => 'onPostDispatchFrontendDetail',
             'sArticles::sGetArticlesByCategory::after'                            => 'afterGetArticlesByCategory',
             'sArticles::sGetArticleCharts::after'                                 => 'afterGetArticleCharts',
+            'Shopware_Controllers_Widgets_Listing_fetchListing_preFetch'          => 'onWidgetsListingFetchListingPreFetch',
             'Legacy_Struct_Converter_Convert_Emotion_Element'                     => 'filterConvertedEmotionComponent',
         ];
+    }
+
+    /**
+     * @param \Enlight_Event_EventArgs $args
+     */
+    public function onWidgetsListingFetchListingPreFetch(\Enlight_Event_EventArgs $args)
+    {
+        if (!in_array(PluginConfig::SHOW_PROPERTIES_ON_LISTING, $this->pluginConfig->getShowPropertiesOn(), true)) {
+            return;
+        }
+
+        /** @var \Shopware_Controllers_Widgets_Listing $subject */
+        $subject = $args->get('subject');
+        $view    = $subject->View();
+
+        $view->assign('sArticles', $this->addPropertiesToArticlesArray($view->getAssign('sArticles')));
     }
 
     /**
