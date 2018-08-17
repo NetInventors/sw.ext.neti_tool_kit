@@ -24,72 +24,112 @@
     </changelog>
 
     <changelog version="2.4.4">
-        <changes lang="de"><![CDATA[
+        <changes lang="de">
+            <![CDATA[
 [#28995] "Unified Session Service" aus Foundation implementieren
-]]></changes>
-        <changes lang="en"><![CDATA[
+]]>
+        </changes>
+        <changes lang="en">
+            <![CDATA[
 [#28995]Implement "Unified Session Service" from Foundation
-]]></changes>
+]]>
+        </changes>
     </changelog>
 
     <changelog version="2.4.3">
-        <changes lang="de"><![CDATA[
+        <changes lang="de">
+            <![CDATA[
 [#22](GitHub) Optimiert den Fix aus v2.4.3 (@wizmobln)
-]]></changes>
-        <changes lang="en"><![CDATA[
+]]>
+        </changes>
+        <changes lang="en">
+            <![CDATA[
 [#22](GitHub) Optimized fix from v2.4.3 (@wizmobln)
-]]></changes>
+]]>
+        </changes>
     </changelog>
 
     <changelog version="2.4.2">
-        <changes lang="de"><![CDATA[
+        <changes lang="de">
+            <![CDATA[
 [#22](GitHub) Behebt einen Fehler, der auftrat, falls Artikel für Kundengruppen gesperrt oder nicht lagernd sind. (@wizmobln)
-]]></changes>
-        <changes lang="en"><![CDATA[
+]]>
+        </changes>
+        <changes lang="en">
+            <![CDATA[
 [#22](GitHub) Fixes an error that occured if articles are blocked by customer group or out of stock. (@wizmobln)
-]]></changes>
+]]>
+        </changes>
     </changelog>
 
     <changelog version="2.4.1">
-        <changes lang="de"><![CDATA[
+        <changes lang="de">
+            <![CDATA[
 [#27322] Behebt die fehlenden Artikel-Eigenschaften im Artikel-Slider-Einkaufselement unter SW5.3
-]]></changes>
-        <changes lang="en"><![CDATA[
+]]>
+        </changes>
+        <changes lang="en">
+            <![CDATA[
 [#27322] Fixed the article slider emotion properties under SW5.3
-]]></changes>
+]]>
+        </changes>
     </changelog>
 
     <changelog version="2.4.0">
-        <changes lang="de"><![CDATA[[#27354] Artikel-Eigenschaften können im Frontend ausgeblendet werden.]]></changes>
-        <changes lang="en"><![CDATA[[#27354] Added option to hide properties from frontend.]]></changes>
+        <changes lang="de">
+            <![CDATA[[#27354] Artikel-Eigenschaften können im Frontend ausgeblendet werden.]]>
+        </changes>
+        <changes lang="en">
+            <![CDATA[[#27354] Added option to hide properties from frontend.]]>
+        </changes>
     </changelog>
 
     <changelog version="2.3.0">
-        <changes lang="de"><![CDATA[[#26437] Artikel-Eingenschaften sind jetzt auch im Zuberhör-Reiter und in Product-Streams verfügbar.]]></changes>
-        <changes lang="en"><![CDATA[[#26437] Properties are now available in the related articles tab and in product streams.]]></changes>
+        <changes lang="de">
+
+            <![CDATA[[#26437] Artikel-Eingenschaften sind jetzt auch im Zuberhör-Reiter und in Product-Streams verfügbar.]]>
+        </changes>
+        <changes lang="en">
+
+            <![CDATA[[#26437] Properties are now available in the related articles tab and in product streams.]]>
+        </changes>
     </changelog>
 
     <changelog version="2.2.1">
-        <changes lang="de"><![CDATA[[#26409] Behebt einen Fehler im Frontend, wenn keine Option für sProperties gewählt wurde und verbessert die Unterstützung der TopSeller und Artikel-Slider.]]></changes>
-        <changes lang="en"><![CDATA[[#26409] Fixed an error in the frontend if no option was selected for sProperties and improves support for TopSellers and article sliders.]]></changes>
+        <changes lang="de">
+
+            <![CDATA[[#26409] Behebt einen Fehler im Frontend, wenn keine Option für sProperties gewählt wurde und verbessert die Unterstützung der TopSeller und Artikel-Slider.]]>
+        </changes>
+        <changes lang="en">
+
+            <![CDATA[[#26409] Fixed an error in the frontend if no option was selected for sProperties and improves support for TopSellers and article sliders.]]>
+        </changes>
     </changelog>
 
     <changelog version="2.2.0">
-        <changes lang="de"><![CDATA[[#26381] Property Eigenschaften überall verfügbar machen.]]></changes>
-        <changes lang="en"><![CDATA[[#26381] Property-Sets accessible everywhere.]]></changes>
+        <changes lang="de">
+            <![CDATA[[#26381] Property Eigenschaften überall verfügbar machen.]]>
+        </changes>
+        <changes lang="en">
+            <![CDATA[[#26381] Property-Sets accessible everywhere.]]>
+        </changes>
     </changelog>
 
     <changelog version="2.1.0">
-        <changes lang="de"><![CDATA[
+        <changes lang="de">
+            <![CDATA[
 [#26336] Attribut-Daten und Firmenname zum UserData-Array hinzugefügt.
 [#25802] Custom HTML/JS Code Einkaufsweltelement wurde reimplementiert.
 Die Konfigurationsoption für die sUserLoggedIn-Smarty-Variable wurde aus Performance-Gründen entfernt, der Wert wird nun immer ans Template übergeben.
-]]></changes>
-        <changes lang="en"><![CDATA[
+]]>
+        </changes>
+        <changes lang="en">
+            <![CDATA[
 [#26336] Added attribute data and company name to user data array.
 [#25802] Reimplement custom HTML/JS Code emotion component.
 The config option to disable the sUserLoggedIn smarty variable was removed for performance reasons. The variable is now always assigned.
-]]></changes>
+]]>
+        </changes>
     </changelog>
 
     <changelog version="2.0.0">
