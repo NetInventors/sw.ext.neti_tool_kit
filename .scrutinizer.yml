@@ -3,14 +3,14 @@ build:
         analysis:
             dependencies:
                 before:
-                    - git clone https://github.com/NetInventors/sw.ext.neti_foundation.git
+                    - git clone ssh://git@gitlab.netinventors.de:2202/shopware/plugins/NetiFoundation.git
             environment:
                 php:
-                    version: 7.2.0       # Common versions: 5.4, 5.5, 5.6, 7.0 or hhvm
+                    version: 5.6.16
 
 filter:
     dependency_paths:
-        - "sw.ext.neti_foundation/*"
+        - "NetiFoundation/*"
 
 checks:
     php:
