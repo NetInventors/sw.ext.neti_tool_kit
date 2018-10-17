@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="../../../engine/Shopware/Components/Plugin/schema/plugin.xsd">
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.5/engine/Shopware/Components/Plugin/schema/plugin.xsd">
 
     <label lang="de">ToolKit</label>
     <label lang="en">ToolKit</label>
 
-    <version>2.4.5</version>
+    <version>3.0.0</version>
     <link>http://www.shopinventors.de</link>
     <author>Net Inventors GmbH</author>
-    <compatibility minVersion="5.2.6"/>
+    <compatibility minVersion="5.5.0"/>
+
+    <changelog version="3.0.0">
+        <changes lang="de">
+            <![CDATA[
+[#29998] Release für SW 5.5
+]]>
+        </changes>
+        <changes lang="en">
+            <![CDATA[
+[#29998] Release for SW 5.5
+]]>
+        </changes>
+    </changelog>
 
     <changelog version="2.4.5">
         <changes lang="de">
@@ -138,6 +151,6 @@ The config option to disable the sUserLoggedIn smarty variable was removed for p
     </changelog>
 
     <requiredPlugins>
-        <requiredPlugin pluginName="NetiFoundation" minVersion="2.4.4"/>
+        <requiredPlugin pluginName="NetiFoundation" minVersion="3.0.0"/>
     </requiredPlugins>
 </plugin>
