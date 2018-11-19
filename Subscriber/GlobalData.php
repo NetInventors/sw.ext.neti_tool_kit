@@ -63,8 +63,8 @@ class GlobalData implements SubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'Enlight_Controller_Action_PreDispatch_Frontend' => 'addSmartyGlobals',
-            'Enlight_Controller_Action_PreDispatch_Widgets'  => 'addSmartyGlobals',
+            'Enlight_Controller_Action_PostDispatchSecure_Frontend' => 'addSmartyGlobals',
+            'Enlight_Controller_Action_PostDispatchSecure_Widgets'  => 'addSmartyGlobals',
         ];
     }
 
