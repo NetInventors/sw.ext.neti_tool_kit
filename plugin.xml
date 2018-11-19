@@ -5,11 +5,24 @@
     <label lang="de">ToolKit</label>
     <label lang="en">ToolKit</label>
 
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <link>http://www.shopinventors.de</link>
     <author>Net Inventors GmbH</author>
     <compatibility minVersion="5.5.0"/>
 
+    <changelog version="3.0.1">
+        <changes lang="de">
+        <![CDATA[
+[#30354] Fix für die Kundenanmeldung
+]]>
+        </changes>
+        <changes lang="en">
+    <![CDATA[
+[#30354] Fix for the customer login
+]]>
+        </changes>
+    </changelog>
+    
     <changelog version="3.0.0">
         <changes lang="de">
             <![CDATA[
