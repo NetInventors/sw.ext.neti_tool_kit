@@ -14,11 +14,13 @@
     <changes lang="de">
         <![CDATA[
 [#30371] sUserCustomernumber und sUserBillingadressCompany zugefügt
+[#30354] Fix für die Kundenanmeldung
 ]]>
         </changes>
         <changes lang="en">
     <![CDATA[
 [#30371] added sUserCustomernumber and sUserBillingadressCompany
+[#30354] Fix for the customer login
 ]]>
         </changes>
     </changelog>

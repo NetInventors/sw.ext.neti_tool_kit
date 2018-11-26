@@ -151,9 +151,9 @@ class GlobalData implements SubscriberInterface
            ->leftJoin('c.attribute', 'ca')
            ->leftJoin('c.defaultBillingAddress', 'cdb')
            ->leftJoin('cdb.attribute', 'cdba')
-           ->leftJoin('c.billing', 'cb')
+           ->leftJoin('c.defaultBillingAddress', 'cb')
            ->leftJoin('cb.attribute', 'cba')
-           ->leftJoin('c.shipping', 'cs')
+           ->leftJoin('c.defaultShippingAddress', 'cs')
            ->leftJoin('cs.attribute', 'csa')
            ->where($qb->expr()->eq('c.id', ':customerId'))
            ->setMaxResults(1);
