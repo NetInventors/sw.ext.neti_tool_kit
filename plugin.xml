@@ -15,12 +15,14 @@
         <![CDATA[
 [#30371] sUserCustomernumber und sUserBillingadressCompany zugefügt
 [#30354] Fix für die Kundenanmeldung
+[#30443] $netiUserData auf der Startseite füllen
 ]]>
         </changes>
         <changes lang="en">
     <![CDATA[
 [#30371] added sUserCustomernumber and sUserBillingadressCompany
 [#30354] Fix for the customer login
+[#30443] Fill $netiUserData on the homepage
 ]]>
         </changes>
     </changelog>
