@@ -18,6 +18,7 @@ class PluginConfig extends AbstractClass
     const SHOW_PROPERTIES_ON_TOP_SELLER             = 'topSeller';
     const SHOW_PROPERTIES_ON_LISTING                = 'listing';
     const SHOW_PROPERTIES_ON_BOUGHT                 = 'bought';
+    const SHOW_PROPERTIES_ON_SEARCH                 = 'search';
 
     /**
      * @var bool - provide $netiUserData globally

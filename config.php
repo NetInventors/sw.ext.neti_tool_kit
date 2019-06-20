@@ -60,6 +60,7 @@ return [
                 ['similarArticles', ['de_DE' => 'Ähnliche Artikel / Zubehör', 'en_GB' => 'Similar / similar articles']],
                 ['bought', ['de_DE' => 'Kunden kauften auch', 'en_GB' => 'Bought articles']],
                 ['topSeller', ['de_DE' => 'TopSeller', 'en_GB' => 'TopSellers']],
+                ['search', ['de_DE' => 'Artikelsuche', 'en_GB' => 'Article Search']],
                 [
                     'emotionArticleSlider',
                     ['de_DE' => 'Artikel-Slider-Einkaufsweltelement', 'en_GB' => 'Article slider emotion component'],
