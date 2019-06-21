@@ -238,14 +238,14 @@ class FrontendProperties implements SubscriberInterface
     {
         if (
             !in_array(
-            PluginConfig::SHOW_PROPERTIES_ON_SEARCH,
-            $this->pluginConfig->getShowPropertiesOn(),
-            true
-        )
+                PluginConfig::SHOW_PROPERTIES_ON_SEARCH,
+                $this->pluginConfig->getShowPropertiesOn(),
+                true
+            )
         ) {
             return;
         }
-        
+
         $view                        = $args->getSubject()->View();
         $sSearchResults              = $view->getAssign('sSearchResults');
         $sArticles                   = $sSearchResults['sArticles'];
