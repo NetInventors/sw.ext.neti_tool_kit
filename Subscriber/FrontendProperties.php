@@ -237,7 +237,7 @@ class FrontendProperties implements SubscriberInterface
     public function onPostDispatchFrontendSearch(\Enlight_Controller_ActionEventArgs $args)
     {
         if (
-        !in_array(
+            !in_array(
             PluginConfig::SHOW_PROPERTIES_ON_SEARCH,
             $this->pluginConfig->getShowPropertiesOn(),
             true
@@ -245,6 +245,7 @@ class FrontendProperties implements SubscriberInterface
         ) {
             return;
         }
+        
         $view                        = $args->getSubject()->View();
         $sSearchResults              = $view->getAssign('sSearchResults');
         $sArticles                   = $sSearchResults['sArticles'];
