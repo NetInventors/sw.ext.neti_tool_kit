@@ -71,6 +71,7 @@ class FrontendProperties implements SubscriberInterface
             'Enlight_Controller_Action_PostDispatchSecure_Widgets_Recommendation' => 'addPropsToBought',
             'Enlight_Controller_Action_PostDispatchSecure_Widgets_Emotion'        => 'addPropsToEmotion',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Detail'        => 'onPostDispatchFrontendDetail',
+            'Enlight_Controller_Action_PostDispatchSecure_Frontend_Search'        => 'onPostDispatchFrontendSearch',
             'sArticles::sGetArticlesByCategory::after'                            => 'afterGetArticlesByCategory',
             'sArticles::sGetArticleCharts::after'                                 => 'afterGetArticleCharts',
             'Shopware_Controllers_Widgets_Listing_fetchListing_preFetch'          => 'onWidgetsListingFetchListingPreFetch',
@@ -231,6 +232,26 @@ class FrontendProperties implements SubscriberInterface
         $sArticle['sRelatedArticles'] = $this->addPropertiesToArticlesArray($sArticle['sRelatedArticles']);
 
         $view->assign('sArticle', $sArticle);
+    }
+
+    public function onPostDispatchFrontendSearch(\Enlight_Controller_ActionEventArgs $args)
+    {
+        if (
+            !in_array(
+                PluginConfig::SHOW_PROPERTIES_ON_SEARCH,
+                $this->pluginConfig->getShowPropertiesOn(),
+                true
+            )
+        ) {
+            return;
+        }
+
+        $view                        = $args->getSubject()->View();
+        $sSearchResults              = $view->getAssign('sSearchResults');
+        $sArticles                   = $sSearchResults['sArticles'];
+        $sSearchResults['sArticles'] = $this->addPropertiesToArticlesArray($sArticles);
+
+        $view->assign('sSearchResults', $sSearchResults);
     }
 
     /**
