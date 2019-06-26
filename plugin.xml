@@ -13,12 +13,12 @@
     <changelog version="3.1.1">
         <changes lang="de">
             <![CDATA[
-[#30373] Artikel-Eigenschaften auch in der Suche verfügbar
+[#31869] Artikel-Eigenschaften auch in der Suche verfügbar
 ]]>
         </changes>
         <changes lang="en">
             <![CDATA[
-[#30373] Article-Properties available in search.
+[#31869] Article-Properties available in search.
 ]]>
         </changes>
     </changelog>
