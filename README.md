@@ -1,15 +1,10 @@
-**NOTE**: If you are viewing this on GitHub, please be advised that the repo has been moved to [GitLab](https://gitlab.netinventors.de/shopware/labs/NetiToolKit) and we will no longer respond to Pull Requests on this repo, as it is only a mirror of the GitLab repository.
-
-
 # Shopware ToolKit
-
 ## About ToolKit
-
 This plugin for Shopware  provides some usefull functions and tools wich every developer needs sometimes.
 
 ## Requirements:
-* Shopware version >= 5.2.6
-* NetiFoundation >= 2.0.0
+* Shopware version >= 5.6.0
+* NetiFoundation >= 4.0.0
 
 ## Install:
 1. If you haven't already, download and install our free plugin "[NetiFoundation](http://store.shopware.com/detail/index/sArticle/162025)" from the Shopware Community Store

@@ -1,9 +1,0 @@
-{
-  "name": "netinventors/sw.ext.neti_tool_kit",
-  "type": "project",
-  "require-dev": {
-    "shopware/shopware": "~5.4"
-  },
-  "license": "MIT",
-  "minimum-stability": "stable"
-}
