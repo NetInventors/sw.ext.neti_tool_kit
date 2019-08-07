@@ -1,10 +1,5 @@
-**NOTE**: If you are viewing this on GitHub, please be advised that the repo has been moved to [GitLab](https://gitlab.netinventors.de/shopware/labs/NetiToolKit) and we will no longer respond to Pull Requests on this repo, as it is only a mirror of the GitLab repository.
-
-
 # Shopware ToolKit
-
 ## About ToolKit
-
 This plugin for Shopware  provides some usefull functions and tools wich every developer needs sometimes.
 
 ## Requirements:
